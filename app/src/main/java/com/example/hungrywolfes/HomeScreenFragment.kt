@@ -5,16 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.hungrywolfes.databinding.FragmentHomeScreenBinding
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hungrywolfes.overview.OverviewViewModel
 
 
 class HomeScreenFragment : Fragment() {
     private var binding: FragmentHomeScreenBinding? = null
-    private lateinit var reycleView: RecyclerView
+    private val viewModel:OverviewViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +32,7 @@ class HomeScreenFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
         binding?.homeScreen = this
+        binding?.viewModel=viewModel
         binding?.recyclerViewMeals?.adapter=CategoryAdapter()
         binding?.recyclerViewPhotos?.adapter=ImagesAdapter()
     }
