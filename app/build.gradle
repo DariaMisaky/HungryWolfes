@@ -13,6 +13,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility "1.8"
-        targetCompatibility "1.8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -50,4 +52,15 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    //Coil
+    implementation "io.coil-kt:coil:1.1.1"
+    // Moshi
+    implementation 'com.squareup.moshi:moshi-kotlin:1.9.3'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    // Retrofit with Moshi Converter
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 }
