@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/red"
-    tools:context=".SplashScreenActivity">
+    tools:context=".ui.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,15 +20,13 @@
         app:layout_constraintWidth_percent="0.5" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
         android:src="@drawable/text_hungry_wolfes"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintVertical_bias="0.25"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
