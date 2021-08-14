@@ -4,9 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relative_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/margin_medium">
+    android:layout_width="156dp"
+    android:layout_height="282dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/meal_image"
@@ -16,21 +15,20 @@
         app:layout_constraintBottom_toTopOf="@id/meal_description"
         app:layout_constraintLeft_toLeftOf="@id/card_view"
         app:layout_constraintRight_toRightOf="@id/card_view"
-
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        card_view:cardUseCompatPadding="true"
         android:layout_width="140dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_extra_extra_large"
+        android:layout_marginTop="@dimen/margin_extra_large"
         android:outlineSpotShadowColor="@color/black"
         app:cardCornerRadius="35dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="@id/meal_description"
         app:layout_constraintEnd_toEndOf="@id/relative_layout"
-        app:layout_constraintHeight_percent="0.78"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="@id/relative_layout"
         app:layout_constraintTop_toTopOf="@id/meal_image"
         app:layout_constraintVertical_bias="1">
@@ -45,11 +43,12 @@
         android:elevation="10dp"
         android:gravity="center"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/relative_layout"
         app:layout_constraintEnd_toEndOf="@+id/meal_image"
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="@+id/meal_image"
         app:layout_constraintTop_toBottomOf="@+id/meal_image"
-        app:layout_constraintWidth_percent="0.7"
-        tools:text="Description fdaljfn sadfodjsafijosdafosapifjsafodipjsa" />
+        app:layout_constraintWidth_percent="0.8"
+        tools:text="Description fdaljfn sadfodjsafijosdafosapifjsafodipjsa fdaojifdsa fdopisajfsopji daria are mere mul" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
