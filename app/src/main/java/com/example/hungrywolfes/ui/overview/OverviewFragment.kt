@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.OverviewBinding
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealCategory
@@ -28,12 +29,17 @@ class OverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = OverviewBinding.inflate(inflater, container, false)
-        binding.fragment = this@OverviewFragment
-        binding.viewModel = this@OverviewFragment.viewModel
-        binding.lifecycleOwner = this@OverviewFragment.viewLifecycleOwner
-        this@OverviewFragment.binding = binding
+        binding.apply {
+            fragment = this@OverviewFragment
+            viewModel = this@OverviewFragment.viewModel
+            lifecycleOwner = this@OverviewFragment.viewLifecycleOwner
+            this@OverviewFragment.binding = binding
+            recyclerViewMeals.adapter = categoryAdapter
+            recyclerViewPhotos.adapter = imagesAdapter
 
+        }
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,18 +51,13 @@ class OverviewFragment : Fragment() {
 
     private fun setupUi() {
         binding?.let {
-            it.recyclerViewMeals.adapter = categoryAdapter
             categoryAdapter.setClickListener { item ->
                 viewModel.mealSelected(item)
             }
 
-            it.recyclerViewPhotos.adapter = imagesAdapter
-
 
 
         }
-
-
     }
 
     private fun setupObservers() {
@@ -65,7 +66,7 @@ class OverviewFragment : Fragment() {
         }
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
-            
+
         }
 
     }

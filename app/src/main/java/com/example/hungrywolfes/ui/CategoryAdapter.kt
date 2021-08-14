@@ -14,20 +14,19 @@ import com.example.hungrywolfes.ui.overview.OverviewViewModel
 class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val data: MutableList<ListMealCategory> = mutableListOf()
-
     private var clickListener: (item: ListMealCategory) -> Unit = {}
-    private var alreadyExecuted=false
-    private var selectedItemPosition = -1
-
+    private var alreadyExecuted = false
+    private var selectedItemPosition = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+
+        if (!alreadyExecuted) {
+            clickListener(data[0])
+            alreadyExecuted = true
+        }
+
         val layout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
-
-        if(!alreadyExecuted) {
-            clickListener(data[0])
-            alreadyExecuted=true
-        }
 
         return CategoryViewHolder(layout)
 
@@ -36,10 +35,10 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = data[position]
         holder.textview.text = item.strCategory
-        Log.d("agg", "data= ${data[position]}")
+
+
 
         holder.textview.setOnClickListener {
-
             clickListener(item)
             val previousItem = selectedItemPosition
             selectedItemPosition = position
@@ -47,6 +46,20 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             notifyItemChanged(previousItem)
         }
 
+        updateButtonDesign(holder, position)
+
+    }
+
+    override fun getItemCount() = data.size
+
+    fun setData(data: List<ListMealCategory>) {
+        this.data.clear()
+        this.data.addAll(data)
+        notifyDataSetChanged()
+
+    }
+
+    private fun updateButtonDesign(holder: CategoryViewHolder, position: Int) {
         if (selectedItemPosition == position) {
             holder.textview.setTextColor(
                 ContextCompat.getColor(
@@ -59,19 +72,12 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             holder.textview.setTextColor(
                 ContextCompat.getColor(
                     holder.textview.context,
-                    R.color.black
+                    R.color.textCategory
                 )
             )
             holder.line.visibility = View.INVISIBLE
         }
-    }
 
-    override fun getItemCount() = data.size
-
-    fun setData(data: List<ListMealCategory>) {
-        this.data.clear()
-        this.data.addAll(data)
-        notifyDataSetChanged()
     }
 
 

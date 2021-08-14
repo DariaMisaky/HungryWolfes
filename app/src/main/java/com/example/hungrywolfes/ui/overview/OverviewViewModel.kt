@@ -9,7 +9,7 @@ import com.example.hungrywolfes.network.*
 import kotlinx.coroutines.launch
 
 private const val TAG: String = "OverviewViewModel"
-
+enum class Status{LOADING,ERROR,DONE}
 class OverviewViewModel : ViewModel() {
 
     private val _mealCategory = MutableLiveData<MealCategory>()
@@ -17,6 +17,9 @@ class OverviewViewModel : ViewModel() {
 
     private val _mealImages = MutableLiveData<MealImages>()
     var mealImages: LiveData<MealImages> = _mealImages
+
+    private val _status= MutableLiveData<Status>()
+    val status:LiveData<Status> =_status
 
     init {
         getMealCategory()
@@ -35,12 +38,15 @@ class OverviewViewModel : ViewModel() {
 
     fun mealSelected(item: ListMealCategory) {
         viewModelScope.launch {
+            _status.value=Status.LOADING
             try {
 
                 _mealImages.value = CategoryApi.retrofitService.getFood(item.strCategory)
+                _status.value=Status.DONE
                 Log.d(TAG, "$item")
             } catch (e: Exception) {
                 Log.d(TAG, "getFood error")
+                _status.value=Status.ERROR
             }
         }
 
