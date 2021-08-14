@@ -9,7 +9,6 @@ import com.example.hungrywolfes.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -23,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_navigation)?.setupWithNavController(
             navController
         )
+
+
+
+
+
 
 
     }

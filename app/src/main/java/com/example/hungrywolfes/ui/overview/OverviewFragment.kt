@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hungrywolfes.OverviewBinding
 import com.example.hungrywolfes.R
+import com.example.hungrywolfes.network.ListMealCategory
 import com.example.hungrywolfes.ui.CategoryAdapter
 import com.example.hungrywolfes.ui.ImagesAdapter
 
@@ -31,6 +32,7 @@ class OverviewFragment : Fragment() {
         binding.viewModel = this@OverviewFragment.viewModel
         binding.lifecycleOwner = this@OverviewFragment.viewLifecycleOwner
         this@OverviewFragment.binding = binding
+
         return binding.root
     }
 
@@ -49,8 +51,7 @@ class OverviewFragment : Fragment() {
             }
 
             it.recyclerViewPhotos.adapter = imagesAdapter
-            // imagesAdapter.
-            Log.d("agg", "${imagesAdapter.itemCount}")
+
 
 
         }
@@ -64,6 +65,7 @@ class OverviewFragment : Fragment() {
         }
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
+            
         }
 
     }

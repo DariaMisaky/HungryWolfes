@@ -18,7 +18,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/grey">
+
 
         <TextView
             android:id="@+id/title_tv"
@@ -26,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_extra_large"
-            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_extra_extra_large"
             android:gravity="start"
             android:text="@string/home_screen_title"
             android:textColor="@color/black"
@@ -66,8 +68,8 @@
             android:id="@+id/recyclerView_photos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
             android:layout_marginTop="@dimen/margin_medium_large"
+            android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingStart="@dimen/margin_medium_large"
             android:paddingEnd="@dimen/margin_medium_large"

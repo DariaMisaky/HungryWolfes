@@ -38,7 +38,7 @@ class OverviewViewModel : ViewModel() {
             try {
 
                 _mealImages.value = CategoryApi.retrofitService.getFood(item.strCategory)
-
+                Log.d(TAG, "$item")
             } catch (e: Exception) {
                 Log.d(TAG, "getFood error")
             }

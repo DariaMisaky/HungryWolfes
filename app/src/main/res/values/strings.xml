@@ -4,4 +4,13 @@
     <string name="home_screen_title">Delicious food for you</string>
     <string name="search">Search</string>
 
+    <string name="MenuHome">Home</string>
+    <string name="MenuFavorites">Favorites</string>
+    <string name="MenuUser">User</string>
+
+
+
+
+
+
 </resources>

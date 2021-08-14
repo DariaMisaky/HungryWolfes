@@ -1,5 +1,6 @@
 package com.example.hungrywolfes.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +32,11 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
         val photo = listDataImages[position]
         val imageDescription = photo.strMeal
         val imageUrl = photo.strMealThumb
+        var words=imageDescription.split(" ")
+        Log.d("dada","$words")
         Glide.with(holder.mealsImages).load(imageUrl).into(holder.mealsImages);
         holder.mealDescription.text = imageDescription
+
 
 
     }
@@ -51,6 +55,4 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
 }
 
-private fun ImageView.setImageResource(photo: ListMealsImages) {
 
-}

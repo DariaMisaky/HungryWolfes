@@ -1,5 +1,6 @@
 package com.example.hungrywolfes.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealCategory
+import com.example.hungrywolfes.ui.overview.OverviewViewModel
 
 class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val data: MutableList<ListMealCategory> = mutableListOf()
 
     private var clickListener: (item: ListMealCategory) -> Unit = {}
-
+    private var alreadyExecuted=false
     private var selectedItemPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -22,12 +24,28 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
 
+        if(!alreadyExecuted) {
+            clickListener(data[0])
+            alreadyExecuted=true
+        }
+
         return CategoryViewHolder(layout)
+
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = data[position]
         holder.textview.text = item.strCategory
+        Log.d("agg", "data= ${data[position]}")
+
+        holder.textview.setOnClickListener {
+
+            clickListener(item)
+            val previousItem = selectedItemPosition
+            selectedItemPosition = position
+            notifyItemChanged(position)
+            notifyItemChanged(previousItem)
+        }
 
         if (selectedItemPosition == position) {
             holder.textview.setTextColor(
@@ -46,17 +64,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             )
             holder.line.visibility = View.INVISIBLE
         }
-
-        // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
-        holder.textview.setOnClickListener {
-            clickListener(data[position])
-
-
-            val previousItem = selectedItemPosition
-            selectedItemPosition = position
-            notifyItemChanged(position)
-            notifyItemChanged(previousItem)
-        }
     }
 
     override fun getItemCount() = data.size
@@ -67,10 +74,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         notifyDataSetChanged()
     }
 
-    fun addNewItem(element: ListMealCategory) {
-        data.add(element)
-        notifyItemInserted(data.lastIndex)
-    }
 
     fun setClickListener(listener: (item: ListMealCategory) -> Unit) {
         clickListener = listener
