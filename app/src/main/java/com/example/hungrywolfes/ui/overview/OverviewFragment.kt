@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.OverviewBinding
 import com.example.hungrywolfes.R
@@ -36,7 +38,7 @@ class OverviewFragment : Fragment() {
             this@OverviewFragment.binding = binding
             recyclerViewMeals.adapter = categoryAdapter
             recyclerViewPhotos.adapter = imagesAdapter
-
+            setupUi()
         }
         return binding.root
 
@@ -45,18 +47,27 @@ class OverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupDivider()
         setupUi()
         setupObservers()
+    }
+    private fun setupDivider(){
+        val divider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
+        ContextCompat.getDrawable(requireContext(),R.drawable.divider).let {
+            if (it != null) {
+                divider.setDrawable(it)
+            }
+        }
+        binding?.recyclerViewMeals?.addItemDecoration(divider)
+        binding?.recyclerViewPhotos?.addItemDecoration(divider)
     }
 
     private fun setupUi() {
         binding?.let {
             categoryAdapter.setClickListener { item ->
                 viewModel.mealSelected(item)
+                Log.d("data","FETCH IMAGES")
             }
-
-
-
         }
     }
 
@@ -64,8 +75,10 @@ class OverviewFragment : Fragment() {
         viewModel.mealCategory.observe(viewLifecycleOwner) {
             categoryAdapter.setData(it.meals)
         }
+        Log.d("data","OBSERVEEEEE")
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
+            binding?.recyclerViewPhotos?.scrollToPosition(0)
 
         }
 

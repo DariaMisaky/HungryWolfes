@@ -23,7 +23,6 @@ class OverviewViewModel : ViewModel() {
 
     init {
         getMealCategory()
-
     }
 
     private fun getMealCategory() {

@@ -17,13 +17,12 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
     private var clickListener: (item: ListMealCategory) -> Unit = {}
     private var alreadyExecuted = false
     private var selectedItemPosition = 0
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         if (!alreadyExecuted) {
             clickListener(data[0])
             alreadyExecuted = true
         }
-
         val layout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
@@ -34,10 +33,8 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = data[position]
+
         holder.textview.text = item.strCategory
-
-
-
         holder.textview.setOnClickListener {
             clickListener(item)
             val previousItem = selectedItemPosition
