@@ -20,7 +20,7 @@
 
     <dimen name="layout_width_size">220dp</dimen>
     <dimen name="layout_height_size">342dp</dimen>
-
+    <dimen name="description_size">18sp</dimen>
 
 
 </resources>

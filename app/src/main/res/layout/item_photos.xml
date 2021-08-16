@@ -33,14 +33,17 @@
             android:id="@+id/meal_description"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_super_small"
+            android:layout_marginStart="@dimen/margin_extra_small"
+            android:layout_marginEnd="@dimen/margin_extra_small"
             android:layout_marginTop="@dimen/image_height_size"
             android:layout_marginBottom="@dimen/margin_medium"
             android:elevation="10dp"
+            android:textSize="@dimen/description_size"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="3"
             android:textColor="@color/black"
-            tools:text="Description fdaljfn sadfodjsafijosdafosapifjsafodipjsa fdaojifdsa fdopisajfsopji daria are mere multe" />
+            tools:text="Description " />
     </androidx.cardview.widget.CardView>
 
 
