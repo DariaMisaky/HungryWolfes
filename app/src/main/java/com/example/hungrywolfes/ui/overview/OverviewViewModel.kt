@@ -23,12 +23,17 @@ class OverviewViewModel : ViewModel() {
 
     init {
         getMealCategory()
+        searchedMeal(" ")
     }
 
     private fun getMealCategory() {
         viewModelScope.launch {
             try {
-                _mealCategory.value = CategoryApi.retrofitService.getCategory()
+                CategoryApi.retrofitService.getCategory()?.let { categories->
+                    _mealCategory.value = categories
+                    categories.meals.getOrNull(0)?.let{mealSelected(it)}
+                }
+
             } catch (e: Exception) {
                 Log.d(TAG, e.message ?: "Error")
             }

@@ -23,7 +23,7 @@ class OverviewFragment : Fragment() {
     private var binding: OverviewBinding? = null
     private val viewModel: OverviewViewModel by activityViewModels()
 
-    private val categoryAdapter = CategoryAdapter()
+    private val categoryAdapter = CategoryAdapter { item -> viewModel.mealSelected(item) }
     private val imagesAdapter = ImagesAdapter()
 
     override fun onCreateView(
@@ -38,7 +38,6 @@ class OverviewFragment : Fragment() {
             this@OverviewFragment.binding = binding
             recyclerViewMeals.adapter = categoryAdapter
             recyclerViewPhotos.adapter = imagesAdapter
-            setupUi()
         }
         return binding.root
 
@@ -48,12 +47,12 @@ class OverviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupDivider()
-        setupUi()
         setupObservers()
     }
-    private fun setupDivider(){
+
+    private fun setupDivider() {
         val divider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
-        ContextCompat.getDrawable(requireContext(),R.drawable.divider).let {
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider).let {
             if (it != null) {
                 divider.setDrawable(it)
             }
@@ -62,20 +61,11 @@ class OverviewFragment : Fragment() {
         binding?.recyclerViewPhotos?.addItemDecoration(divider)
     }
 
-    private fun setupUi() {
-        binding?.let {
-            categoryAdapter.setClickListener { item ->
-                viewModel.mealSelected(item)
-                Log.d("data","FETCH IMAGES")
-            }
-        }
-    }
-
     private fun setupObservers() {
         viewModel.mealCategory.observe(viewLifecycleOwner) {
             categoryAdapter.setData(it.meals)
         }
-        Log.d("data","OBSERVEEEEE")
+        Log.d("data", "OBSERVEEEEE")
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
             binding?.recyclerViewPhotos?.scrollToPosition(0)

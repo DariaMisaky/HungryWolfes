@@ -11,18 +11,13 @@ import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealCategory
 import com.example.hungrywolfes.ui.overview.OverviewViewModel
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val data: MutableList<ListMealCategory> = mutableListOf()
-    private var clickListener: (item: ListMealCategory) -> Unit = {}
-    private var alreadyExecuted = false
     private var selectedItemPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        if (!alreadyExecuted) {
-            clickListener(data[0])
-            alreadyExecuted = true
-        }
+
         val layout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
@@ -75,11 +70,6 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             holder.line.visibility = View.INVISIBLE
         }
 
-    }
-
-
-    fun setClickListener(listener: (item: ListMealCategory) -> Unit) {
-        clickListener = listener
     }
 
     inner class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
