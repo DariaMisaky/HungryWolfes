@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.overview.OverviewFragment">
 
-    <data class=".OverviewBinding">
-
-        <variable
-            name="viewModel"
-            type="com.example.hungrywolfes.ui.overview.OverviewViewModel" />
+    <data class="OverviewBinding">
 
         <variable
             name="fragment"
@@ -70,17 +66,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium_large"
-            android:layout_marginBottom="140dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingStart="@dimen/margin_medium_large"
             android:paddingEnd="@dimen/margin_medium_large"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/recyclerView_meals"
             tools:listitem="@layout/item_photos" />
 

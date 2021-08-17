@@ -10,11 +10,11 @@
 
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_medium_plus">32sp</dimen>
     <dimen name="text_size_large">42sp</dimen>
+    <dimen name="text_size_extra_large">82sp</dimen>
 
     <dimen name="image_size_large">96dp</dimen>
-    <dimen name="text_super_small">80dp</dimen>
-
     <dimen name="image_width_size">176dp</dimen>
     <dimen name="image_height_size">134dp</dimen>
 
@@ -27,6 +27,9 @@
     <dimen name="text_margin_large">100dp</dimen>
     <dimen name="text_margin_extra_large">146dp</dimen>
     <dimen name="item_view_size_super_small">3dp</dimen>
+    <dimen name="card_radius_size">35dp</dimen>
+    <dimen name="elevation_max">10dp</dimen>
+    <dimen name="margin_size_super_super_large">154dp</dimen>
 
 
 </resources>

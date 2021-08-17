@@ -11,7 +11,8 @@ import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealCategory
 import com.example.hungrywolfes.ui.overview.OverviewViewModel
 
-class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Unit) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Unit) :
+    RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     private val data: MutableList<ListMealCategory> = mutableListOf()
     private var selectedItemPosition = 0
@@ -28,7 +29,6 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = data[position]
-
         holder.textview.text = item.strCategory
         holder.textview.setOnClickListener {
             clickListener(item)
@@ -37,9 +37,7 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
             notifyItemChanged(position)
             notifyItemChanged(previousItem)
         }
-
         updateButtonDesign(holder, position)
-
     }
 
     override fun getItemCount() = data.size

@@ -1,6 +1,5 @@
 package com.example.hungrywolfes.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
         var mealsImages = view.findViewById<ImageView>(R.id.meal_image)
         val mealDescription = view.findViewById<TextView>(R.id.meal_description)
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val layout = LayoutInflater
@@ -50,8 +48,4 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
     override fun getItemCount(): Int {
         return listDataImages.size
     }
-
-
 }
-
-

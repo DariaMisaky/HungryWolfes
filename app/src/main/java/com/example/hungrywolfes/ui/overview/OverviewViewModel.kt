@@ -29,22 +29,21 @@ class OverviewViewModel : ViewModel() {
     private fun getMealCategory() {
         viewModelScope.launch {
             try {
-                CategoryApi.retrofitService.getCategory()?.let { categories->
+                CategoryApi.retrofitService.getCategory()?.let { categories ->
                     _mealCategory.value = categories
-                    categories.meals.getOrNull(0)?.let{mealSelected(it)}
+                    categories.meals.getOrNull(0)?.let { getCategoryMeals(it) }
                 }
 
             } catch (e: Exception) {
-                Log.d(TAG, e.message ?: "Error")
+                Log.e(TAG, e.message ?: "Error getMealCategory")
             }
         }
     }
 
-    fun mealSelected(item: ListMealCategory) {
+    fun getCategoryMeals(item: ListMealCategory) {
         viewModelScope.launch {
             _status.value=Status.LOADING
             try {
-
                 _mealImages.value = CategoryApi.retrofitService.getFood(item.strCategory)
                 _status.value=Status.DONE
                 Log.d(TAG, "$item")
@@ -57,7 +56,13 @@ class OverviewViewModel : ViewModel() {
 
     }
 
+    fun searchedMeal(item: String) {
+        viewModelScope.launch {
+            try {
+                _searchMeal.value = CategoryApi.retrofitService.searchFood(item)
+            } catch (e: java.lang.Exception) {
 
-
-
+            }
+        }
+    }
 }

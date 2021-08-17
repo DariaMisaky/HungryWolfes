@@ -1,16 +1,13 @@
 <resources>
     <string name="app_name">HungryWolfes</string>
-
     <string name="home_screen_title">Delicious food for you</string>
     <string name="search">Search</string>
-
-    <string name="MenuHome">Home</string>
-    <string name="MenuFavorites">Favorites</string>
-    <string name="MenuUser">User</string>
-
-
-
-
-
-
+    <string name="menu_home">Home</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_user">User</string>
+    <string name="results_found">Found %1$s </string>
+    <plurals name="results">
+        <item quantity="one">%d result</item>
+        <item quantity="other">%d results</item>
+    </plurals>
 </resources>
