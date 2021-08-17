@@ -65,7 +65,6 @@ class OverviewFragment : Fragment() {
         viewModel.mealCategory.observe(viewLifecycleOwner) {
             categoryAdapter.setData(it.meals)
         }
-        Log.d("data", "OBSERVEEEEE")
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
             binding?.recyclerViewPhotos?.scrollToPosition(0)

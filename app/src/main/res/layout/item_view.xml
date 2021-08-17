@@ -13,12 +13,12 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Daria" />
+        tools:text="Beef" />
 
     <View
         android:id="@+id/line"
         android:layout_width="0dp"
-        android:layout_height="3dp"
+        android:layout_height="@dimen/item_view_size_super_small"
         android:layout_marginTop="@dimen/margin_extra_small"
         android:background="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -41,7 +41,6 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
     }
 
-
     fun setDataImages(dataImages: List<ListMealsImages>) {
         this.listDataImages.clear()
         this.listDataImages.addAll(dataImages)

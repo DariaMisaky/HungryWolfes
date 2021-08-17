@@ -23,7 +23,7 @@ class OverviewViewModel : ViewModel() {
 
     init {
         getMealCategory()
-        searchedMeal(" ")
+
     }
 
     private fun getMealCategory() {
