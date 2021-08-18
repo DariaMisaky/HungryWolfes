@@ -18,7 +18,7 @@ import com.example.hungrywolfes.ui.ImagesAdapter
 
 class HomeFragment : Fragment() {
 
-    private var binding: HomeBinding? = null
+    private lateinit var binding: HomeBinding
     private val viewModel: OverviewViewModel by viewModels()
 
     private val categoryAdapter = CategoryAdapter { item -> viewModel.getCategoryMeals(item) }
@@ -28,30 +28,27 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = HomeBinding.inflate(inflater, container, false)
-        binding.apply {
-            lifecycleOwner = this@HomeFragment.viewLifecycleOwner
-            this@HomeFragment.binding = binding
-            recyclerViewMeals.adapter = categoryAdapter
-            recyclerViewPhotos.adapter = imagesAdapter
-        }
+        binding = HomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = viewModel
-        setupDivider()
+        binding.viewModel = viewModel
+        setupRecyclerViews()
         setupObservers()
     }
 
-    private fun setupDivider() {
+    private fun setupRecyclerViews() {
         val divider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
         ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
             divider.setDrawable(it)
         }
-        binding?.recyclerViewMeals?.addItemDecoration(divider)
-        binding?.recyclerViewPhotos?.addItemDecoration(divider)
+        binding.recyclerViewMeals.addItemDecoration(divider)
+        binding.recyclerViewPhotos.addItemDecoration(divider)
+
+        binding.recyclerViewMeals.adapter = categoryAdapter
+        binding.recyclerViewPhotos.adapter = imagesAdapter
     }
 
     private fun setupObservers() {
@@ -60,7 +57,7 @@ class HomeFragment : Fragment() {
         }
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
-            binding?.recyclerViewPhotos?.scrollToPosition(0)
+            binding.recyclerViewPhotos.scrollToPosition(0)
         }
         viewModel.goToSearch.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_homeScreen_to_fragment_search_screen)
