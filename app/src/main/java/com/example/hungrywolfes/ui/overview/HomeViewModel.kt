@@ -5,13 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
-import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.*
 import kotlinx.coroutines.launch
 
-private const val TAG: String = "OverviewViewModel"
-enum class Status{LOADING,ERROR,DONE}
+private const val TAG = "HomeViewModel"
+
 class OverviewViewModel : ViewModel() {
 
     private val _mealCategory = MutableLiveData<MealCategory>()
@@ -42,18 +40,14 @@ class OverviewViewModel : ViewModel() {
 
     fun getCategoryMeals(item: ListMealCategory) {
         viewModelScope.launch {
-            _status.value=Status.LOADING
             try {
                 _mealImages.value = CategoryApi.retrofitService.getFood(item.strCategory)
-                _status.value=Status.DONE
+
                 Log.d(TAG, "$item")
             } catch (e: Exception) {
-                Log.d(TAG, "getFood error")
-                _status.value=Status.ERROR
+                Log.e(TAG, "Error getCategoryMeals")
             }
         }
-
-
     }
 
     fun searchClicked() {

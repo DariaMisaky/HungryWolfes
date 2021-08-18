@@ -62,6 +62,11 @@ class HomeFragment : Fragment() {
             imagesAdapter.setDataImages(it.meals)
             binding?.recyclerViewPhotos?.scrollToPosition(0)
         }
-
+        viewModel.goToSearch.observe(viewLifecycleOwner) {
+            if (it) {
+                viewModel.setValueFalse()
+                findNavController().navigate(R.id.action_homeScreen_to_fragment_search_screen)
+            }
+        }
     }
 }
