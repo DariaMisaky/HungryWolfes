@@ -29,14 +29,13 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val photo = listDataImages[position]
         val imageDescription = photo.strMeal
-        val imageUrl = photo.strMealThumb
-        var words=imageDescription.split(" ")
-        Log.d("dada","$words")
-        Glide.with(holder.mealsImages).load(imageUrl).into(holder.mealsImages);
+        Glide.with(holder.mealsImages)
+            .load(photo.strMealThumb)
+            .placeholder(R.drawable.loading_img)
+            .error(R.drawable.ic_connection_error)
+            .into(holder.mealsImages)
+
         holder.mealDescription.text = imageDescription
-
-
-
     }
 
     fun setDataImages(dataImages: List<ListMealsImages>) {
