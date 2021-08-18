@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hungrywolfes.network.*
+import com.example.hungrywolfs.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 private const val TAG = "HomeViewModel"
@@ -18,8 +19,8 @@ class OverviewViewModel : ViewModel() {
     private val _mealImages = MutableLiveData<MealImages>()
     val mealImages: LiveData<MealImages> = _mealImages
 
-    private val _goToSearch = MutableLiveData<Boolean>(false)
-    val goToSearch: LiveData<Boolean> = _goToSearch
+    private val _goToSearch = SingleLiveEvent<Any>()
+    val goToSearch = _goToSearch
 
     init {
         getMealCategory()
@@ -51,10 +52,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun searchClicked() {
-        _goToSearch.value = true
+       _goToSearch.call()
     }
 
-    fun setValueFalse() {
-        _goToSearch.value = false
-    }
 }
