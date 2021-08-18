@@ -6,7 +6,7 @@
     app:startDestination="@id/homeScreen">
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.example.hungrywolfes.ui.overview.OverviewFragment"
+        android:name="com.example.hungrywolfes.ui.overview.HomeFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_search_screen"
-        android:name="com.example.hungrywolfes.ui.SearchScreenFragment"
+        android:name="com.example.hungrywolfes.ui.searchScreen.SearchScreenFragment"
         android:label="fragment_search_screen"
         tools:layout="@layout/fragment_search_screen" />
     <fragment

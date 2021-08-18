@@ -11,14 +11,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.R
+import com.example.hungrywolfes.databinding.HomeBinding
 import com.example.hungrywolfes.ui.CategoryAdapter
 import com.example.hungrywolfes.ui.ImagesAdapter
-import com.example.hungrywolfes.databinding.OverviewBinding
 
 
-class OverviewFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var binding: OverviewBinding? = null
+    private var binding: HomeBinding? = null
     private val viewModel: OverviewViewModel by viewModels()
 
     private val categoryAdapter = CategoryAdapter { item -> viewModel.getCategoryMeals(item) }
@@ -28,31 +28,27 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = OverviewBinding.inflate(inflater, container, false)
+        val binding = HomeBinding.inflate(inflater, container, false)
         binding.apply {
-            fragment = this@OverviewFragment
-            lifecycleOwner = this@OverviewFragment.viewLifecycleOwner
-            this@OverviewFragment.binding = binding
+            lifecycleOwner = this@HomeFragment.viewLifecycleOwner
+            this@HomeFragment.binding = binding
             recyclerViewMeals.adapter = categoryAdapter
             recyclerViewPhotos.adapter = imagesAdapter
         }
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding?.viewModel = viewModel
         setupDivider()
         setupObservers()
     }
 
     private fun setupDivider() {
         val divider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
-        ContextCompat.getDrawable(requireContext(), R.drawable.divider).let {
-            if (it != null) {
-                divider.setDrawable(it)
-            }
+        ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
+            divider.setDrawable(it)
         }
         binding?.recyclerViewMeals?.addItemDecoration(divider)
         binding?.recyclerViewPhotos?.addItemDecoration(divider)
@@ -65,13 +61,7 @@ class OverviewFragment : Fragment() {
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
             binding?.recyclerViewPhotos?.scrollToPosition(0)
-
         }
 
     }
-
-    fun searchClicked() {
-        findNavController().navigate(R.id.action_homeScreen_to_fragment_search_screen)
-    }
-
 }

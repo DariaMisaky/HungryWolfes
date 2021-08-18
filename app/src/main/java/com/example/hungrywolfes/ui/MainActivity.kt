@@ -12,8 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -42,5 +40,4 @@ class MainActivity : AppCompatActivity() {
            findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility =
                 if (bottomNavVisibility) View.VISIBLE else View.GONE
         }
-
 }

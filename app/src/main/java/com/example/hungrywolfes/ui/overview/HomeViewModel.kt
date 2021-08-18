@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.*
 import kotlinx.coroutines.launch
 
@@ -16,24 +18,22 @@ class OverviewViewModel : ViewModel() {
     val mealCategory: LiveData<MealCategory> = _mealCategory
 
     private val _mealImages = MutableLiveData<MealImages>()
-    var mealImages: LiveData<MealImages> = _mealImages
+    val mealImages: LiveData<MealImages> = _mealImages
 
-    private val _status= MutableLiveData<Status>()
-    val status:LiveData<Status> =_status
+    private val _goToSearch = MutableLiveData<Boolean>(false)
+    val goToSearch: LiveData<Boolean> = _goToSearch
 
     init {
         getMealCategory()
-
     }
 
     private fun getMealCategory() {
         viewModelScope.launch {
             try {
-                CategoryApi.retrofitService.getCategory()?.let { categories ->
+                CategoryApi.retrofitService.getCategory().let { categories ->
                     _mealCategory.value = categories
                     categories.meals.getOrNull(0)?.let { getCategoryMeals(it) }
                 }
-
             } catch (e: Exception) {
                 Log.e(TAG, e.message ?: "Error getMealCategory")
             }
@@ -56,13 +56,11 @@ class OverviewViewModel : ViewModel() {
 
     }
 
-    fun searchedMeal(item: String) {
-        viewModelScope.launch {
-            try {
-                _searchMeal.value = CategoryApi.retrofitService.searchFood(item)
-            } catch (e: java.lang.Exception) {
+    fun searchClicked() {
+        _goToSearch.value = true
+    }
 
-            }
-        }
+    fun setValueFalse() {
+        _goToSearch.value = false
     }
 }
