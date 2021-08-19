@@ -66,15 +66,15 @@ class SearchScreenFragment : Fragment() {
         val verticalDivider = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
         val horizontalDivider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
 
-        setContextCompat(verticalDivider)
-        setContextCompat(horizontalDivider)
+        setDividerDrawable(verticalDivider)
+        setDividerDrawable(horizontalDivider)
 
         binding.recyclerViewSearched.adapter = searchedImagesAdapter
         binding.recyclerViewSearched.addItemDecoration(horizontalDivider)
         binding.recyclerViewSearched.addItemDecoration(verticalDivider)
     }
 
-    private fun setContextCompat(divider: DividerItemDecoration) {
+    private fun setDividerDrawable(divider: DividerItemDecoration) {
         ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
             divider.setDrawable(it)
         }
