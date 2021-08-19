@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.detailScreen.DetailsFragment">
+
+    <data class=".DetailBinding">
+
+        <variable
+            name="viewModel"
+            type="com.example.hungrywolfes.ui.detailsScreen.DetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/layout_heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.onFavoriteButton()}"
+                android:padding="@dimen/padding_large"
+                app:layout_constraintBottom_toTopOf="@+id/meal_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.97"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/favorite_button"
+                    android:layout_width="@dimen/button_medium_width"
+                    android:layout_height="@dimen/button_medium_height"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:background="@drawable/ic_favorite_heart"
+                    android:focusable="true"
+                    android:onClick="@{() -> viewModel.onFavoriteButton()}" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/button_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:onClick="@{()->viewModel.navigateBack()}"
+                android:padding="@dimen/padding_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.029"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/back_button"
+                    android:layout_width="@dimen/back_button_small_width"
+                    android:layout_height="@dimen/back_button_small_height"
+                    android:background="@drawable/ic_backbutton"
+                    android:onClick="@{()->viewModel.navigateBack()}" />
+            </FrameLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/meal_image"
+                android:layout_width="232dp"
+                android:layout_height="232dp"
+                android:layout_marginTop="@dimen/margin_small"
+                android:elevation="@dimen/elevation_max"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_layout"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/meal_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center"
+                android:text="@{viewModel.detailsMeal.strMeal}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium_plus"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView_tags"
+                app:layout_constraintEnd_toEndOf="@id/meal_image"
+                app:layout_constraintStart_toStartOf="@id/meal_image"
+                app:layout_constraintTop_toBottomOf="@id/meal_image"
+                tools:text="@string/search" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingEnd="@dimen/margin_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/ingredients"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/button_layout"
+                app:layout_constraintTop_toBottomOf="@id/meal_name"
+                tools:listitem="@layout/item_tag" />
+
+            <TextView
+                android:id="@+id/ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/ingredients"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/button_layout"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView_tags" />
+
+            <RadioGroup
+                android:id="@+id/checkboxes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/ingredients"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients">
+
+                <CheckBox
+                    android:id="@+id/checkbox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure1,viewModel.detailsMeal.strIngredient1)}" />
+
+                <CheckBox
+                    android:id="@+id/checkbox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure2,viewModel.detailsMeal.strIngredient2)}" />
+
+                <CheckBox
+                    android:id="@+id/checkbox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure3,viewModel.detailsMeal.strIngredient3)}" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/instructions_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@string/instructions"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ingredients"
+                app:layout_constraintTop_toBottomOf="@id/checkboxes" />
+
+            <TextView
+                android:id="@+id/instructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_small"
+                android:text="@{viewModel.detailsMeal.strInstructions}"
+                android:textSize="@dimen/text_size_small_plus"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/instructions_title"
+                tools:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

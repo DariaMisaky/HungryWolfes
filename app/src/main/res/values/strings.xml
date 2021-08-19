@@ -5,9 +5,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_favorites">Favorites</string>
     <string name="menu_user">User</string>
-    <string name="results_found">Found %1$s </string>
     <plurals name="results">
-        <item quantity="one">%d result</item>
-        <item quantity="other">%d results</item>
+        <item quantity="one">Found %d result</item>
+        <item quantity="other">Found %d results</item>
     </plurals>
+    <string name="instructions">Instructions</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="measure_ingredients">%s %s</string>
 </resources>

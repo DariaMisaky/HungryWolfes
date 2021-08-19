@@ -1,5 +1,6 @@
 package com.example.hungrywolfes.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,10 @@ import com.bumptech.glide.Glide
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealsImages
 
-class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
+private const val TAG = "ImagesAdapter"
+
+class ImagesAdapter(private val clickListener: (item: String) -> Unit) :
+    RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
 
     private val listDataImages: MutableList<ListMealsImages> = mutableListOf()
 
@@ -34,6 +38,10 @@ class ImagesAdapter : RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
             .placeholder(R.drawable.loading_img)
             .error(R.drawable.ic_connection_error)
             .into(holder.mealsImages)
+        holder.itemView.setOnClickListener {
+            clickListener(photo.idMeal)
+            Log.d(TAG, "onBindViewHolder: ${photo.idMeal}")
+        }
 
         holder.mealDescription.text = imageDescription
     }

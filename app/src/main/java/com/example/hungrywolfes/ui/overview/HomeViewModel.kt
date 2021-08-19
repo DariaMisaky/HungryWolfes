@@ -31,8 +31,9 @@ class OverviewViewModel : ViewModel() {
             try {
                 CategoryApi.retrofitService.getCategory().let { categories ->
                     _mealCategory.value = categories
-                    categories.meals.getOrNull(0)?.let { getCategoryMeals(it) }
+                    categories.meals.getOrNull(0)?.let { getCategoryMeals(it)  }
                 }
+
             } catch (e: Exception) {
                 Log.e(TAG, e.message ?: "Error getMealCategory")
             }
@@ -43,8 +44,6 @@ class OverviewViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _mealImages.value = CategoryApi.retrofitService.getFood(item.strCategory)
-
-                Log.d(TAG, "$item")
             } catch (e: Exception) {
                 Log.e(TAG, "Error getCategoryMeals")
             }

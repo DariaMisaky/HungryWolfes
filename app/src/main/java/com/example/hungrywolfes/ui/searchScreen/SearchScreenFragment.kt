@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.databinding.FragmentSearchScreenBinding
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.ui.SearchedImagesAdapter
+import com.example.hungrywolfes.ui.overview.HomeFragmentDirections
 
 private const val TAG = "SearchScreenFragment"
 
@@ -24,7 +25,7 @@ class SearchScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchScreenBinding
     private val viewModel: SearchViewModel by viewModels()
-    private val searchedImagesAdapter = SearchedImagesAdapter()
+    private val searchedImagesAdapter = SearchedImagesAdapter{item -> navigateToDetailsFragment(item)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +42,14 @@ class SearchScreenFragment : Fragment() {
         searchImages()
         setupObservers()
     }
-
+    fun navigateToDetailsFragment(Mealid:String){
+        val action= SearchScreenFragmentDirections.actionFragmentSearchScreenToDetailsFragment(Mealid)
+        findNavController().navigate(action)
+    }
     private fun searchImages() {
         binding.searchMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                hideKeyboard(context)
+                hideKeyboard()
                 return true
             }
             override fun onQueryTextChange(p0: String?): Boolean {
@@ -90,25 +94,16 @@ class SearchScreenFragment : Fragment() {
             binding.results.text = getNumberOfResults(it.meals.size)
         }
         viewModel.onBackButton.observe(viewLifecycleOwner) {
-            hideKeyboard(context)
+            hideKeyboard()
             findNavController().popBackStack()
         }
     }
 
     private fun showKeyboard() {
-        val inputMethodManager =
-            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(
-            binding.searchMeal.rootView,
-            InputMethodManager.SHOW_FORCED
-        )
         binding.searchMeal.onActionViewExpanded()
     }
 
-    private fun hideKeyboard(context: Context?) {
-        val inputMethodManager =
-            context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(binding.searchMeal.windowToken, 0)
+    private fun hideKeyboard() {
         binding.searchMeal.clearFocus()
     }
 }
