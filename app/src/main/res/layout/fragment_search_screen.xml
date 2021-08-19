@@ -1,15 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.SearchScreenFragment">
+    tools:context=".ui.searchScreen.SearchScreenFragment">
 
+    <data class="FragmentSearchScreenBinding">
+        <variable
+            name="viewModel"
+            type="com.example.hungrywolfes.ui.searchScreen.SearchViewModel" />
 
-    <TextView
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Search screen Fragment" />
+        android:background="@color/grey">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="@dimen/back_button_small_width"
+            android:layout_height="@dimen/back_button_small_height"
+            android:layout_marginStart="@dimen/margin_large"
+            android:background="@drawable/ic_backbutton"
+            android:onClick="@{()->viewModel.navigateBack()}"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/search_meal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_meal" />
+
+        <SearchView
+            android:id="@+id/search_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@color/grey"
+            android:focusable="true"
+            android:iconifiedByDefault="true"
+            android:inputType="text"
+            android:queryBackground="@color/grey"
+            android:queryHint="@string/search"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_extra_extra_large"
+           android:outlineSpotShadowColor="@color/grey"
+            app:cardCornerRadius="@dimen/card_radius_size">
+
+            <TextView
+                android:id="@+id/results"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_extra_extra_large"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@string/results_found"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium_plus"
+                android:textStyle="bold"
+                tools:text="Found 25 results" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_searched"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_size_super_super_large"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:elevation="@dimen/elevation_max"
+            android:paddingStart="@dimen/divider_size"
+            android:paddingTop="@dimen/margin_medium"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="16"
+            tools:listitem="@layout/item_searched_photos" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+
+
+
+

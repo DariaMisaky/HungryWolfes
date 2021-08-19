@@ -12,4 +12,13 @@ interface MealAPI {
     suspend fun getFood(
         @Query("c") filter: String
     ): MealImages
+
+    @GET("v1/1/search.php")
+    suspend fun searchFood(
+        @Query("s") filter: String
+    ):MealImages
+
+    @GET("v1/1/lookup.php")
+    suspend fun detailsFood(
+        @Query("i") filter : Int):MealDetails
 }
