@@ -27,10 +27,12 @@ class SearchedImagesAdapter : RecyclerView.Adapter<SearchedImagesAdapter.ImageVi
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val photo = listDataImages[position]
-        val imageDescription = photo.strMeal
-        val imageUrl = photo.strMealThumb
-        Glide.with(holder.mealsImages).load(imageUrl).into(holder.mealsImages);
-        holder.mealDescription.text = imageDescription
+        Glide.with(holder.mealsImages)
+            .load(photo.strMealThumb)
+            .placeholder(R.drawable.loading_img)
+            .error(R.drawable.ic_connection_error)
+            .into(holder.mealsImages)
+        holder.mealDescription.text =  photo.strMeal
 
     }
     fun setDataImages(dataImages: List<ListMealsImages>) {
@@ -43,5 +45,3 @@ class SearchedImagesAdapter : RecyclerView.Adapter<SearchedImagesAdapter.ImageVi
         return listDataImages.size
     }
 }
-
-

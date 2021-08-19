@@ -3,7 +3,6 @@ package com.example.hungrywolfes.ui.searchScreen
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +37,6 @@ class SearchScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        binding.results.text = getNumberOfResults()
         setupRecyclerViews()
         searchImages()
         setupObservers()
@@ -50,7 +48,6 @@ class SearchScreenFragment : Fragment() {
                 hideKeyboard(context)
                 return true
             }
-
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0 != null) {
                     viewModel.getSearchedMeal(p0)
@@ -69,35 +66,31 @@ class SearchScreenFragment : Fragment() {
         val verticalDivider = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
         val horizontalDivider = DividerItemDecoration(requireContext(), RecyclerView.HORIZONTAL)
 
-        getContextCompat(verticalDivider)
-        getContextCompat(horizontalDivider)
+        setContextCompat(verticalDivider)
+        setContextCompat(horizontalDivider)
 
         binding.recyclerViewSearched.adapter = searchedImagesAdapter
         binding.recyclerViewSearched.addItemDecoration(horizontalDivider)
         binding.recyclerViewSearched.addItemDecoration(verticalDivider)
     }
 
-    private fun getContextCompat(divider: DividerItemDecoration) {
+    private fun setContextCompat(divider: DividerItemDecoration) {
         ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let {
             divider.setDrawable(it)
         }
     }
 
-    private fun getNumberOfResults(): String {
-        val numberOfResults = searchedImagesAdapter.itemCount
-        val numberOfResultsPlurals =
-            resources.getQuantityString(R.plurals.results, numberOfResults, numberOfResults)
-        return getString(R.string.results_found, numberOfResultsPlurals)
+    private fun getNumberOfResults(results: Int): String {
+        return resources.getQuantityString(R.plurals.results, results, results)
     }
 
     private fun setupObservers() {
         viewModel.searchMeal.observe(viewLifecycleOwner) {
             searchedImagesAdapter.setDataImages(it.meals)
-            binding.results.text = getNumberOfResults()
+            binding.results.text = getNumberOfResults(it.meals.size)
         }
         viewModel.onBackButton.observe(viewLifecycleOwner) {
             hideKeyboard(context)
-
             findNavController().popBackStack()
         }
     }
