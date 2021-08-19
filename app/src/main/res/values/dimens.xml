@@ -30,6 +30,7 @@
     <dimen name="card_radius_size">35dp</dimen>
     <dimen name="elevation_max">10dp</dimen>
     <dimen name="margin_size_super_super_large">154dp</dimen>
+    <dimen name="divider_size">24dp</dimen>
 
 
 </resources>
