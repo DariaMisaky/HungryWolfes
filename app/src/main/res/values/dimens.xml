@@ -36,6 +36,7 @@
     <dimen name="padding_large">32dp</dimen>
     <dimen name="button_medium_width">26dp</dimen>
     <dimen name="button_medium_height">24dp</dimen>
+    <dimen name="image_width_large">232dp</dimen>
 
 
 </resources>

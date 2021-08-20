@@ -16,14 +16,13 @@ import com.example.hungrywolfes.databinding.HomeBinding
 import com.example.hungrywolfes.ui.CategoryAdapter
 import com.example.hungrywolfes.ui.ImagesAdapter
 
-private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeBinding
     private val viewModel: OverviewViewModel by viewModels()
 
     private val categoryAdapter = CategoryAdapter { item -> viewModel.getCategoryMeals(item) }
-    private val imagesAdapter = ImagesAdapter{item -> navigateToFragment(item)}
+    private val imagesAdapter = ImagesAdapter { item -> navigateToFragment(item) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +38,9 @@ class HomeFragment : Fragment() {
         setupRecyclerViews()
         setupObservers()
     }
-    fun navigateToFragment(id:String){
-        Log.d(TAG, "navigateToFragment: $id")
-        val action=HomeFragmentDirections.actionHomeScreenToDetailsFragment(id)
+
+    fun navigateToFragment(id: String) {
+        val action = HomeFragmentDirections.actionHomeScreenToDetailsFragment(id)
         findNavController().navigate(action)
     }
 

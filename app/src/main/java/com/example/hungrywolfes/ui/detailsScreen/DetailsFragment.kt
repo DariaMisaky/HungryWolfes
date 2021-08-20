@@ -1,18 +1,15 @@
-package com.example.hungrywolfes.ui.detailScreen
+package com.example.hungrywolfes.ui.detailsScreen
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
+
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,14 +18,12 @@ import com.example.hungrywolfes.R
 import com.example.hungrywolfes.ui.DetailsAdapter
 import com.example.hungrywolfes.ui.detailsScreen.DetailsViewModel
 
-private const val TAG = "DetailFragment"
-
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailBinding
-    private lateinit var idMealHome: String
-    private lateinit var idMealSearch: String
     private val viewModel: DetailsViewModel by viewModels()
+    val args: DetailsFragmentArgs by navArgs()
     private val detailsAdapter = DetailsAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +45,14 @@ class DetailsFragment : Fragment() {
     }
 
     private fun getArgumentsFromHomeScreen() {
+        var idMealHome=args.idMeal
         arguments?.let { idMealHome = it.getString("idMeal").toString() }
         viewModel.getDetailsMeal(idMealHome.toInt())
     }
-    private fun getArgumentsFromSearchScreen(){
-        arguments?.let{idMealSearch=it.getString("idMeal").toString()}
+
+    private fun getArgumentsFromSearchScreen() {
+        var idMealSearch=args.idMeal
+        arguments?.let { idMealSearch = it.getString("idMeal").toString() }
         viewModel.getDetailsMeal(idMealSearch.toInt())
     }
 
@@ -81,11 +79,8 @@ class DetailsFragment : Fragment() {
         viewModel.stringTags.observe(viewLifecycleOwner) {
             detailsAdapter.setDataTags(it)
         }
-
-        viewModel.addItemToFavorite.observe(viewLifecycleOwner){
-            if(viewModel.addItemToFavorite.value == true){
-            binding.favoriteButton.setBackgroundResource(R.drawable.ic_menu_selected_heart)
-            }
+        viewModel.addItemToFavorite.observe(viewLifecycleOwner) {
+            binding.favoriteButton.setBackgroundResource(R.drawable.selector_add_to_favorite)
         }
     }
 }

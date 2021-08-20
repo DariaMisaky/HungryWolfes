@@ -24,8 +24,9 @@ class DetailsViewModel : ViewModel() {
     private val _stringTags=MutableLiveData<List<String>>()
     val stringTags:LiveData<List<String>> = _stringTags
 
-    private val _addItemToFavorite=MutableLiveData<Boolean>(false)
+    private val _addItemToFavorite=MutableLiveData<Boolean>()
     val addItemToFavorite:LiveData<Boolean> = _addItemToFavorite
+
 
     fun navigateBack() {
         _onBackButton.call()
@@ -39,7 +40,6 @@ class DetailsViewModel : ViewModel() {
                _stringTags.value= detailsMeal.value?.strTags?.split(",")
 
             } catch (e: java.lang.Exception) {
-                Log.e(TAG, "getDetailsMeal: ")
             }
         }
     }

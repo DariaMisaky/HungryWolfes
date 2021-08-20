@@ -1,6 +1,5 @@
 package com.example.hungrywolfes.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealsImages
-
-private const val TAG = "ImagesAdapter"
 
 class ImagesAdapter(private val clickListener: (item: String) -> Unit) :
     RecyclerView.Adapter<ImagesAdapter.ImageViewHolder>() {
@@ -40,7 +37,6 @@ class ImagesAdapter(private val clickListener: (item: String) -> Unit) :
             .into(holder.mealsImages)
         holder.itemView.setOnClickListener {
             clickListener(photo.idMeal)
-            Log.d(TAG, "onBindViewHolder: ${photo.idMeal}")
         }
 
         holder.mealDescription.text = imageDescription
