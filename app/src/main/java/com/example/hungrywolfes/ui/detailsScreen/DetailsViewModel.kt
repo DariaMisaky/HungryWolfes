@@ -20,13 +20,12 @@ class DetailsViewModel : ViewModel() {
     private val _detailsMeal = MutableLiveData<ListMealsDetails>()
     val detailsMeal: LiveData<ListMealsDetails> = _detailsMeal
 
-    val stringTags = _detailsMeal.map {
+    val stringTags =_detailsMeal.map {
         it.strTags?.split(",")
     }
 
-    private val _addItemToFavorite = MutableLiveData<Boolean>()
-    val addItemToFavorite: LiveData<Boolean> = _addItemToFavorite
-
+    private val _addItemToFavoriteButton = MutableLiveData(false)
+    val addItemToFavoriteButton: LiveData<Boolean> = _addItemToFavoriteButton
 
     fun navigateBack() {
         _onBackButton.call()
@@ -41,8 +40,7 @@ class DetailsViewModel : ViewModel() {
             }
         }
     }
-
     fun onFavoriteButton() {
-        _addItemToFavorite.value = true
+        _addItemToFavoriteButton.value = addItemToFavoriteButton.value == false
     }
 }

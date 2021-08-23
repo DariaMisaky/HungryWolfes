@@ -64,12 +64,6 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
-
-            if (viewModel.detailsMeal.value?.idMeal !in viewModel.idImg) {
-                binding.favoriteButton.setImageResource(R.drawable.ic_favorite_heart)
-            } else {
-                binding.favoriteButton.setImageResource(R.drawable.ic_menu_selected_heart)
-            }
         }
 
         viewModel.stringTags.observe(viewLifecycleOwner) {
