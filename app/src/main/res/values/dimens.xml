@@ -38,5 +38,8 @@
     <dimen name="button_medium_height">24dp</dimen>
     <dimen name="image_width_large">232dp</dimen>
 
+    <dimen name="padding_extra_small">12dp</dimen>
+    <dimen name="small_padding">20dp</dimen>
+
 
 </resources>
