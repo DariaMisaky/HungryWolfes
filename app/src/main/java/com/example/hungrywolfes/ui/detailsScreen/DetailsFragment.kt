@@ -2,11 +2,13 @@ package com.example.hungrywolfes.ui.detailsScreen
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,10 +22,9 @@ import com.example.hungrywolfes.ui.detailsScreen.DetailsViewModel
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailBinding
-    private val viewModel: DetailsViewModel by viewModels()
+    private val viewModel: DetailsViewModel by activityViewModels()
     val args: DetailsFragmentArgs by navArgs()
     private val detailsAdapter = DetailsAdapter()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,29 +32,17 @@ class DetailsFragment : Fragment() {
     ): View {
         binding = DetailBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = this@DetailsFragment.viewModel
         }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getArgumentsFromSearchScreen()
-        getArgumentsFromHomeScreen()
+        binding.viewModel = viewModel
+        viewModel.getDetailsMeal(args.idMeal.toInt())
+        viewModel.getDetailsMeal(args.idMeal.toInt())
         setupRecyclerView()
         setupObservers()
-    }
-
-    private fun getArgumentsFromHomeScreen() {
-        var idMealHome=args.idMeal
-        arguments?.let { idMealHome = it.getString("idMeal").toString() }
-        viewModel.getDetailsMeal(idMealHome.toInt())
-    }
-
-    private fun getArgumentsFromSearchScreen() {
-        var idMealSearch=args.idMeal
-        arguments?.let { idMealSearch = it.getString("idMeal").toString() }
-        viewModel.getDetailsMeal(idMealSearch.toInt())
     }
 
     private fun setupRecyclerView() {
@@ -75,12 +64,27 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
+
+            if (viewModel.detailsMeal.value?.idMeal !in viewModel.idImg) {
+                binding.favoriteButton.setImageResource(R.drawable.ic_favorite_heart)
+            } else {
+                binding.favoriteButton.setImageResource(R.drawable.ic_menu_selected_heart)
+            }
         }
+
         viewModel.stringTags.observe(viewLifecycleOwner) {
-            detailsAdapter.setDataTags(it)
+            if (it != null) {
+                detailsAdapter.setDataTags(it)
+            }
         }
-        viewModel.addItemToFavorite.observe(viewLifecycleOwner) {
-            binding.favoriteButton.setBackgroundResource(R.drawable.selector_add_to_favorite)
+
+        viewModel.addItemToFavoriteButton.observe(viewLifecycleOwner) {
+
+            if (viewModel.addItemToFavoriteButton.value == true) {
+                binding.favoriteButton.setImageResource(R.drawable.ic_menu_selected_heart)
+            } else {
+                binding.favoriteButton.setImageResource(R.drawable.ic_favorite_heart)
+            }
         }
     }
 }

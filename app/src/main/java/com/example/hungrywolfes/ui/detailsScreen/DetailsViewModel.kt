@@ -1,12 +1,11 @@
 package com.example.hungrywolfes.ui.detailsScreen
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.CategoryApi
 import com.example.hungrywolfes.network.ListMealsDetails
+import com.example.hungrywolfes.network.ListMealsImages
 import com.example.hungrywolfes.network.MealDetails
 import com.example.hungrywolfs.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -21,11 +20,12 @@ class DetailsViewModel : ViewModel() {
     private val _detailsMeal = MutableLiveData<ListMealsDetails>()
     val detailsMeal: LiveData<ListMealsDetails> = _detailsMeal
 
-    private val _stringTags=MutableLiveData<List<String>>()
-    val stringTags:LiveData<List<String>> = _stringTags
+    val stringTags = _detailsMeal.map {
+        it.strTags?.split(",")
+    }
 
-    private val _addItemToFavorite=MutableLiveData<Boolean>()
-    val addItemToFavorite:LiveData<Boolean> = _addItemToFavorite
+    private val _addItemToFavorite = MutableLiveData<Boolean>()
+    val addItemToFavorite: LiveData<Boolean> = _addItemToFavorite
 
 
     fun navigateBack() {
@@ -37,13 +37,12 @@ class DetailsViewModel : ViewModel() {
             try {
                 _detailsMeal.value =
                     CategoryApi.retrofitService.detailsFood(item).meals.firstOrNull()
-               _stringTags.value= detailsMeal.value?.strTags?.split(",")
-
             } catch (e: java.lang.Exception) {
             }
         }
     }
-    fun onFavoriteButton(){
-        _addItemToFavorite.value=true
+
+    fun onFavoriteButton() {
+        _addItemToFavorite.value = true
     }
 }

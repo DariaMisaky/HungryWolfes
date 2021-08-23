@@ -26,38 +26,38 @@
                 android:id="@+id/favorite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:backgroundTint="@android:color/transparent"
                 android:onClick="@{()->viewModel.onFavoriteButton()}"
                 android:padding="20dp"
-                android:src="@drawable/ic_favorite_heart"
+                android:src="@drawable/selector_add_to_favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/back_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.99"
+                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="@+id/back_button" />
 
             <ImageButton
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:backgroundTint="@android:color/transparent"
-                android:layout_marginStart="@dimen/margin_medium"
                 android:onClick="@{()->viewModel.navigateBack()}"
                 android:padding="20dp"
                 android:src="@drawable/ic_backbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.029"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/meal_image"
                 android:layout_width="@dimen/image_width_large"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="1:1"
                 android:layout_marginTop="@dimen/margin_small"
                 android:elevation="@dimen/elevation_max"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/back_button"
@@ -65,7 +65,7 @@
 
             <TextView
                 android:id="@+id/meal_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:gravity="center"
@@ -73,8 +73,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_medium_plus"
                 app:layout_constraintBottom_toTopOf="@id/recyclerView_tags"
-                app:layout_constraintEnd_toEndOf="@+id/favorite_button"
-                app:layout_constraintStart_toStartOf="@+id/back_button"
+                app:layout_constraintEnd_toEndOf="@+id/meal_image"
+                app:layout_constraintStart_toStartOf="@+id/meal_image"
                 app:layout_constraintTop_toBottomOf="@id/meal_image"
                 tools:text="@string/search" />
 
@@ -116,24 +116,24 @@
                 <CheckBox
                     android:id="@+id/checkbox1"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/text_grey"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure1,viewModel.detailsMeal.strIngredient1)}" />
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure1,viewModel.detailsMeal.strIngredient1)}"
+                    android:textColor="@color/text_grey" />
 
                 <CheckBox
                     android:id="@+id/checkbox2"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/text_grey"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure2,viewModel.detailsMeal.strIngredient2)}" />
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure2,viewModel.detailsMeal.strIngredient2)}"
+                    android:textColor="@color/text_grey" />
 
                 <CheckBox
                     android:id="@+id/checkbox3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_grey"
-                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure3,viewModel.detailsMeal.strIngredient3)}" />
+                    android:text="@{@string/measure_ingredients(viewModel.detailsMeal.strMeasure3,viewModel.detailsMeal.strIngredient3)}"
+                    android:textColor="@color/text_grey" />
             </RadioGroup>
 
             <TextView
@@ -154,9 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:paddingStart="@dimen/margin_large"
-                android:textColor="@color/text_grey"
                 android:paddingEnd="@dimen/margin_small"
                 android:text="@{viewModel.detailsMeal.strInstructions}"
+                android:textColor="@color/text_grey"
                 android:textSize="@dimen/text_size_small_plus"
                 android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
