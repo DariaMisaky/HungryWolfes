@@ -64,20 +64,14 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
+
+            binding.favoriteButton.isChecked =
+                viewModel.detailsMeal.value?.idMeal in viewModel.idImg
         }
 
         viewModel.stringTags.observe(viewLifecycleOwner) {
             if (it != null) {
                 detailsAdapter.setDataTags(it)
-            }
-        }
-
-        viewModel.addItemToFavoriteButton.observe(viewLifecycleOwner) {
-
-            if (viewModel.addItemToFavoriteButton.value == true) {
-                binding.favoriteButton.setImageResource(R.drawable.ic_menu_selected_heart)
-            } else {
-                binding.favoriteButton.setImageResource(R.drawable.ic_favorite_heart)
             }
         }
     }
