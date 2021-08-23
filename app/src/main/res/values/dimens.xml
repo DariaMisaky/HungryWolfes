@@ -9,6 +9,7 @@
     <dimen name="margin_extra_extra_large">96dp</dimen>
 
     <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_small_plus">14sp </dimen>
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_medium_plus">32sp</dimen>
     <dimen name="text_size_large">42sp</dimen>
@@ -22,8 +23,9 @@
     <dimen name="layout_height_size">342dp</dimen>
     <dimen name="description_size">18sp</dimen>
 
-    <dimen name="back_button_small_width">16dp</dimen>
-    <dimen name="back_button_small_height">22dp</dimen>
+    <dimen name="back_button_small_width">12dp</dimen>
+    <dimen name="back_button_small_height">18dp</dimen>
+
     <dimen name="text_margin_large">100dp</dimen>
     <dimen name="text_margin_extra_large">146dp</dimen>
     <dimen name="item_view_size_super_small">3dp</dimen>
@@ -31,6 +33,10 @@
     <dimen name="elevation_max">10dp</dimen>
     <dimen name="margin_size_super_super_large">154dp</dimen>
     <dimen name="divider_size">24dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="button_medium_width">26dp</dimen>
+    <dimen name="button_medium_height">24dp</dimen>
+    <dimen name="image_width_large">232dp</dimen>
 
 
 </resources>

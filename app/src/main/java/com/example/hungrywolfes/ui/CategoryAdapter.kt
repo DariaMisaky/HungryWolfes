@@ -1,6 +1,5 @@
 package com.example.hungrywolfes.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealCategory
-import com.example.hungrywolfes.ui.overview.OverviewViewModel
 
 class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -62,7 +60,7 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
             holder.textview.setTextColor(
                 ContextCompat.getColor(
                     holder.textview.context,
-                    R.color.textCategory
+                    R.color.text_grey
                 )
             )
             holder.line.visibility = View.INVISIBLE

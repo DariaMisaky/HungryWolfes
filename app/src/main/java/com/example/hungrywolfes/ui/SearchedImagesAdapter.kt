@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealsImages
 
-class SearchedImagesAdapter : RecyclerView.Adapter<SearchedImagesAdapter.ImageViewHolder>() {
+class SearchedImagesAdapter(private val clickListener: (item: String) -> Unit) : RecyclerView.Adapter<SearchedImagesAdapter.ImageViewHolder>() {
 
     private val listDataImages: MutableList<ListMealsImages> = mutableListOf()
     class ImageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -32,6 +32,9 @@ class SearchedImagesAdapter : RecyclerView.Adapter<SearchedImagesAdapter.ImageVi
             .placeholder(R.drawable.loading_img)
             .error(R.drawable.ic_connection_error)
             .into(holder.mealsImages)
+        holder.itemView.setOnClickListener {
+           clickListener(photo.idMeal)
+        }
         holder.mealDescription.text =  photo.strMeal
 
     }

@@ -1,6 +1,7 @@
 package com.example.hungrywolfes.ui.overview
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,13 @@ import com.example.hungrywolfes.databinding.HomeBinding
 import com.example.hungrywolfes.ui.CategoryAdapter
 import com.example.hungrywolfes.ui.ImagesAdapter
 
-
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeBinding
     private val viewModel: OverviewViewModel by viewModels()
 
     private val categoryAdapter = CategoryAdapter { item -> viewModel.getCategoryMeals(item) }
-    private val imagesAdapter = ImagesAdapter()
+    private val imagesAdapter = ImagesAdapter { item -> navigateToFragment(item) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,11 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         setupRecyclerViews()
         setupObservers()
+    }
+
+    fun navigateToFragment(id: String) {
+        val action = HomeFragmentDirections.actionHomeScreenToDetailsFragment(id)
+        findNavController().navigate(action)
     }
 
     private fun setupRecyclerViews() {
