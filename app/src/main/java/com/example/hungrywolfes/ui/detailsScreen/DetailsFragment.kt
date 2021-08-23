@@ -64,9 +64,6 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
-
-            binding.favoriteButton.isChecked =
-                viewModel.detailsMeal.value?.idMeal in viewModel.idImg
         }
 
         viewModel.stringTags.observe(viewLifecycleOwner) {
