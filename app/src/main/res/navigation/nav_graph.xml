@@ -42,8 +42,6 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.hungrywolfes.ui.detailsScreen.DetailsFragment"
-        android:label="DetailsFragment">
-        android:name="com.example.hungrywolfes.ui.detailsScreen.DetailsFragment"
         android:label="DetailsFragment" >
         <action
             android:id="@+id/action_detailsFragment_to_homeScreen"
