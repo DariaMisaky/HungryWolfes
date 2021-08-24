@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.databinding.FragmentUserBinding
+private const val terms_and_conditions="https://www.wolfpack-digital.com/privacy"
 
 class UserFragment : Fragment() {
 
@@ -42,7 +43,7 @@ class UserFragment : Fragment() {
         }
         viewModel.onTermsAndConditions.observe(viewLifecycleOwner) {
             val intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.wolfpack-digital.com/privacy"))
+                Intent(Intent.ACTION_VIEW, Uri.parse(terms_and_conditions))
             startActivity(intent)
         }
     }
