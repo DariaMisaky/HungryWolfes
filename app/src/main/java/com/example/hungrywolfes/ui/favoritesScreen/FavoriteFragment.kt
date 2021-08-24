@@ -1,29 +1,29 @@
-package com.example.hungrywolfes.ui.FavoritesScreen
+package com.example.hungrywolfes.ui.favoritesScreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.databinding.FragmentFavoriteBinding
 import com.example.hungrywolfes.ui.FavoriteAdapter
-import com.example.hungrywolfes.ui.detailsScreen.DetailsViewModel
-
-private const val TAG = "FavoriteFragment"
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private val viewModel: FavoriteViewModel by viewModels()
-
-    // private val viewModel:ActivityViewModel by activityViewModels()
-    private val favoriteAdapter by lazy { FavoriteAdapter(viewModel::onRemoveItem) }
+    private val favoriteAdapter by lazy {
+        FavoriteAdapter(viewModel::onRemoveItem) { item ->
+            navigateToFragment(
+                item
+            )
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,6 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setUpObservers()
-        Log.d(TAG, "onViewCreated: ")
     }
 
     private fun setupRecyclerView() {
@@ -55,5 +54,10 @@ class FavoriteFragment : Fragment() {
         viewModel.favoriteMealList.observe(viewLifecycleOwner) {
             viewModel.favoriteMealList.value?.let { it1 -> favoriteAdapter.setDataImages(it1) }
         }
+    }
+
+    private fun navigateToFragment(id: String) {
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToDetailsFragment(id)
+        findNavController().navigate(action)
     }
 }

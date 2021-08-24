@@ -1,17 +1,14 @@
 package com.example.hungrywolfes.ui.detailsScreen
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.CategoryApi
 import com.example.hungrywolfes.network.ListMealsDetails
 import com.example.hungrywolfes.network.ListMealsImages
-import com.example.hungrywolfes.network.MealDetails
 import com.example.hungrywolfs.SingleLiveEvent
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.launch
 
-private const val TAG = "DetailsViewModel"
+private const val keyHawk = "favoriteFood"
 
 class DetailsViewModel : ViewModel() {
 
@@ -34,7 +31,7 @@ class DetailsViewModel : ViewModel() {
 
 
     init {
-        _favoriteMealList.value = Hawk.get("favoriteFood") ?: mutableListOf()
+        _favoriteMealList.value = Hawk.get(keyHawk) ?: mutableListOf()
     }
 
     fun navigateBack() {
@@ -54,27 +51,42 @@ class DetailsViewModel : ViewModel() {
     fun onFavoriteButton() {
         _addItemToFavoriteButton.value = addItemToFavoriteButton.value == false
     }
-    
+
     fun addMealToFavorite() {
-        val idMeal = detailsMeal.value?.idMeal ?: return
-        val nameMeal = detailsMeal.value?.strMeal ?: return
-        val imageMeal = detailsMeal.value?.strMealThumb ?: return
-
-        _favoriteMealList.value?.add(ListMealsImages( nameMeal,imageMeal, idMeal))
-        Log.d(TAG, "addMealToFavoritee favoriteMealList: ${_favoriteMealList.value}")
-        Hawk.put("favoriteFood", _favoriteMealList.value)
-
+        detailsMeal.value?.let { details ->
+            _favoriteMealList.value?.add(
+                ListMealsImages(
+                    details.strMeal,
+                    details.strMealThumb,
+                    details.idMeal
+                )
+            )
+        }
+        Hawk.put(keyHawk, _favoriteMealList.value)
     }
+
     fun removeMealFromFavorite() {
-        val idMeal = detailsMeal.value?.idMeal ?: return
-        val nameMeal = detailsMeal.value?.strMeal ?: return
-        val imageMeal = detailsMeal.value?.strMealThumb ?: return
-
-        _favoriteMealList.value?.remove(ListMealsImages(nameMeal,imageMeal,idMeal))
-        Hawk.put("favoriteFood", _favoriteMealList.value)
+        detailsMeal.value?.let { details ->
+            _favoriteMealList.value?.remove(
+                ListMealsImages(
+                    details.strMeal,
+                    details.strMealThumb,
+                    details.idMeal
+                )
+            )
+        }
+        Hawk.put(keyHawk, _favoriteMealList.value)
     }
 
-    fun itemInFavorite(): Boolean? {
-        return favoriteMealList.value?.contains(detailsMeal.value?.let { it1 -> ListMealsImages(detailsMeal.value!!.strMeal, it1.strMealThumb, detailsMeal.value!!.idMeal) })
+    fun itemInFavorite(): Boolean {
+        return detailsMeal.value?.let { details ->
+            favoriteMealList.value?.contains(
+                ListMealsImages(
+                    details.strMeal,
+                    details.strMealThumb,
+                    details.idMeal
+                )
+            )
+        } ?: false
     }
 }

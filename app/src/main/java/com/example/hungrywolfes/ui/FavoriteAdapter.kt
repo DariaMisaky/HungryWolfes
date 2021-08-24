@@ -11,11 +11,13 @@ import com.bumptech.glide.Glide
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.network.ListMealsImages
 
-private const val TAG = "FavoriteAdapter"
 
-class FavoriteAdapter(private val onRemove: (ListMealsImages) -> Unit) : RecyclerView.Adapter<FavoriteAdapter.ImageViewHolder>() {
+class FavoriteAdapter(
+    private val onRemove: (ListMealsImages) -> Unit,
+    private val clickListener: (item: String) -> Unit
+) : RecyclerView.Adapter<FavoriteAdapter.ImageViewHolder>() {
 
-    private var ListMealsImages: MutableList<ListMealsImages> = mutableListOf()
+    private var listMealsImages: MutableList<ListMealsImages> = mutableListOf()
 
     class ImageViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var mealsImages: ImageView = view.findViewById(R.id.meal_image)
@@ -30,34 +32,32 @@ class FavoriteAdapter(private val onRemove: (ListMealsImages) -> Unit) : Recycle
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val photo = ListMealsImages[position]
-        val image=photo.strMealThumb
-        val idMeal=photo.idMeal
-        val nameMeal=photo.strMeal
+        val photo = listMealsImages[position]
 
         Glide.with(holder.mealsImages)
-            .load(image)
+            .load(photo.strMealThumb)
             .placeholder(R.drawable.loading_img)
             .error(R.drawable.ic_connection_error)
             .into(holder.mealsImages)
-        holder.mealName.text = nameMeal
+        holder.mealName.text = photo.strMeal
         holder.itemView.setOnLongClickListener {
-            val item = ListMealsImages[position]
-            ListMealsImages.remove(item)
-            onRemove(item)
+            listMealsImages.remove(photo)
+            onRemove(photo)
             notifyDataSetChanged()
             true
+        }
+        holder.itemView.setOnClickListener {
+            clickListener(photo.idMeal)
         }
     }
 
     fun setDataImages(dataImages: MutableList<ListMealsImages>) {
-        this.ListMealsImages.clear()
-        this.ListMealsImages.addAll(dataImages)
+        this.listMealsImages.clear()
+        this.listMealsImages.addAll(dataImages)
         notifyDataSetChanged()
-        Log.d(TAG, "setDataImages: $ListMealsImages")
     }
 
     override fun getItemCount(): Int {
-        return ListMealsImages.size
+        return listMealsImages.size
     }
 }
