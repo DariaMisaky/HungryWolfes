@@ -27,9 +27,13 @@
     </fragment>
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.hungrywolfes.ui.UserFragment"
+        android:name="com.example.hungrywolfes.ui.profileScreen.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.hungrywolfes.ui.FavoriteFragment"

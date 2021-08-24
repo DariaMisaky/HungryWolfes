@@ -12,4 +12,8 @@
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
     <string name="measure_ingredients">%s %s</string>
+    <string name="my_profile">My profile</string>
+    <string name="favorites">Favorites</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="my_favorites">My favorites</string>
 </resources>
