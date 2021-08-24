@@ -17,13 +17,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hungrywolfes.DetailBinding
 import com.example.hungrywolfes.R
+import com.example.hungrywolfes.network.ListMealsImages
 import com.example.hungrywolfes.ui.DetailsAdapter
 import com.example.hungrywolfes.ui.detailsScreen.DetailsFragmentArgs
 
+private const val TAG = "DetailsFragment"
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailBinding
-    private val viewModel: DetailsViewModel by activityViewModels()
+    private val viewModel: DetailsViewModel by viewModels()
     val args: DetailsFragmentArgs by navArgs()
     private val detailsAdapter = DetailsAdapter()
 
@@ -65,11 +67,34 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
-        }
+            binding.favoriteButton.isChecked = viewModel.favoriteMealList.value?.contains(
+                ListMealsImages(it.strMealThumb, it.strMeal, it.idMeal)
+            ) == true
 
+            //viewModel.favoriteMealList.value?.contains(viewModel.detailsMeal.value?.idMeal)
+
+        }
         viewModel.stringTags.observe(viewLifecycleOwner) {
             if (it != null) {
                 detailsAdapter.setDataTags(it)
+            }
+        }
+        viewModel.addItemToFavoriteButton.observe(viewLifecycleOwner) {
+            if (viewModel.favoriteMealList.value?.contains(
+                    viewModel.detailsMeal.value?.let { it1 ->
+                        ListMealsImages(
+                            viewModel.detailsMeal.value!!.strMealThumb,
+                            it1.strMeal,
+                            viewModel.detailsMeal.value!!.idMeal
+                        )
+                    })
+                == true
+            ) {
+                viewModel.removeMealFromFavorite()
+            } else {
+
+                viewModel.addMealToFavorite()
+                Log.d(TAG, "setupObservers: buton apasat")
             }
         }
     }
