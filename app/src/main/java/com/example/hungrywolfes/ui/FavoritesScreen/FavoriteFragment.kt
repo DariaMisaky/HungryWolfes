@@ -21,8 +21,9 @@ private const val TAG = "FavoriteFragment"
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private val viewModel: FavoriteViewModel by viewModels()
-   // private val viewModel:ActivityViewModel by activityViewModels()
-    private val favoriteAdapter = FavoriteAdapter()
+
+    // private val viewModel:ActivityViewModel by activityViewModels()
+    private val favoriteAdapter by lazy { FavoriteAdapter(viewModel::onRemoveItem) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,11 +52,8 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setUpObservers() {
-//        viewModel.idImgLiveData.observe(viewLifecycleOwner) {
-//            favoriteAdapter.setDataImages(viewModel.favoriteMealList)
-//        }
-        viewModel.favoriteMealList.observe(viewLifecycleOwner){
-            Log.d(TAG, "setUpObservers: am observat schimbarea")
+        viewModel.favoriteMealList.observe(viewLifecycleOwner) {
+            viewModel.favoriteMealList.value?.let { it1 -> favoriteAdapter.setDataImages(it1) }
         }
     }
 }

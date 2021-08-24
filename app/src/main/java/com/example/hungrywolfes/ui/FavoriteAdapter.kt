@@ -13,7 +13,7 @@ import com.example.hungrywolfes.network.ListMealsImages
 
 private const val TAG = "FavoriteAdapter"
 
-class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ImageViewHolder>() {
+class FavoriteAdapter(private val onRemove: (ListMealsImages) -> Unit) : RecyclerView.Adapter<FavoriteAdapter.ImageViewHolder>() {
 
     private var ListMealsImages: MutableList<ListMealsImages> = mutableListOf()
 
@@ -42,7 +42,9 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ImageViewHolder>() 
             .into(holder.mealsImages)
         holder.mealName.text = nameMeal
         holder.itemView.setOnLongClickListener {
-            ListMealsImages.remove(ListMealsImages[position])
+            val item = ListMealsImages[position]
+            ListMealsImages.remove(item)
+            onRemove(item)
             notifyDataSetChanged()
             true
         }

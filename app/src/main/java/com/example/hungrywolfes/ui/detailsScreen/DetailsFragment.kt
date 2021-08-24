@@ -67,9 +67,7 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
-            binding.favoriteButton.isChecked = viewModel.favoriteMealList.value?.contains(
-                ListMealsImages(it.strMealThumb, it.strMeal, it.idMeal)
-            ) == true
+            binding.favoriteButton.isChecked = viewModel.itemInFavorite() == true
 
             //viewModel.favoriteMealList.value?.contains(viewModel.detailsMeal.value?.idMeal)
 
@@ -80,21 +78,13 @@ class DetailsFragment : Fragment() {
             }
         }
         viewModel.addItemToFavoriteButton.observe(viewLifecycleOwner) {
-            if (viewModel.favoriteMealList.value?.contains(
-                    viewModel.detailsMeal.value?.let { it1 ->
-                        ListMealsImages(
-                            viewModel.detailsMeal.value!!.strMealThumb,
-                            it1.strMeal,
-                            viewModel.detailsMeal.value!!.idMeal
-                        )
-                    })
-                == true
-            ) {
-                viewModel.removeMealFromFavorite()
-            } else {
 
+            if (viewModel.itemInFavorite() == true) {
+                viewModel.removeMealFromFavorite()
+
+            } else {
                 viewModel.addMealToFavorite()
-                Log.d(TAG, "setupObservers: buton apasat")
+
             }
         }
     }
