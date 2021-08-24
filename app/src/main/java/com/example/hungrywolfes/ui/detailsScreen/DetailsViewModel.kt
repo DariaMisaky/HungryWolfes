@@ -56,18 +56,20 @@ class DetailsViewModel : ViewModel() {
     }
     
     fun addMealToFavorite() {
-        val idMeal = detailsMeal.value?.idMeal!!
-        val nameMeal = detailsMeal.value?.strMeal!!
-        val imageMeal = detailsMeal.value?.strMealThumb!!
+        val idMeal = detailsMeal.value?.idMeal ?: return
+        val nameMeal = detailsMeal.value?.strMeal ?: return
+        val imageMeal = detailsMeal.value?.strMealThumb ?: return
+
         _favoriteMealList.value?.add(ListMealsImages( nameMeal,imageMeal, idMeal))
         Log.d(TAG, "addMealToFavoritee favoriteMealList: ${_favoriteMealList.value}")
         Hawk.put("favoriteFood", _favoriteMealList.value)
 
     }
     fun removeMealFromFavorite() {
-        val idMeal = detailsMeal.value?.idMeal!!
-        val nameMeal = detailsMeal.value?.strMeal!!
-        val imageMeal = detailsMeal.value?.strMealThumb!!
+        val idMeal = detailsMeal.value?.idMeal ?: return
+        val nameMeal = detailsMeal.value?.strMeal ?: return
+        val imageMeal = detailsMeal.value?.strMealThumb ?: return
+
         _favoriteMealList.value?.remove(ListMealsImages(nameMeal,imageMeal,idMeal))
         Hawk.put("favoriteFood", _favoriteMealList.value)
     }
