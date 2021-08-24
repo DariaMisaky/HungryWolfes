@@ -39,7 +39,7 @@
     <dimen name="button_medium_width">26dp</dimen>
     <dimen name="button_medium_height">24dp</dimen>
     <dimen name="image_width_large">232dp</dimen>
-
+  
     <dimen name="margin_size_super_large">154dp</dimen>
     <dimen name="view_large">160dp</dimen>
     <dimen name="small_padding">20dp</dimen>
