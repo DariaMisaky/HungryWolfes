@@ -1,14 +1,11 @@
 package com.example.hungrywolfes.ui.detailsScreen
 
-
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,12 +15,10 @@ import com.bumptech.glide.Glide
 import com.example.hungrywolfes.DetailBinding
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.ui.DetailsAdapter
-import com.example.hungrywolfes.ui.detailsScreen.DetailsFragmentArgs
-
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailBinding
-    private val viewModel: DetailsViewModel by activityViewModels()
+    private val viewModel: DetailsViewModel by viewModels()
     val args: DetailsFragmentArgs by navArgs()
     private val detailsAdapter = DetailsAdapter()
 
@@ -40,7 +35,6 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-        viewModel.getDetailsMeal(args.idMeal.toInt())
         viewModel.getDetailsMeal(args.idMeal.toInt())
         setupRecyclerView()
         setupObservers()
@@ -66,11 +60,8 @@ class DetailsFragment : Fragment() {
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
         }
-
         viewModel.stringTags.observe(viewLifecycleOwner) {
-            if (it != null) {
-                detailsAdapter.setDataTags(it)
-            }
+            it?.let { detailsAdapter.setDataTags(it) }
         }
     }
 }
