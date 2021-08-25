@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -29,16 +28,11 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-        val networkConnection = NetworkConnection(applicationContext)
-        networkConnection.observe(this, Observer { isConnected ->
-            if (isConnected) {
-                if (findNavController(R.id.nav_host_fragment).currentBackStackEntry?.destination?.id == R.id.internetFragment)
-                    findNavController(R.id.nav_host_fragment).popBackStack()
-            } else {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_internetFragment)
-            }
-        })
+        checkInternetConnection()
+
+
     }
+
 
     private val destinationChangedListener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -49,4 +43,17 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.visibility =
                 if (bottomNavVisibility) View.VISIBLE else View.INVISIBLE
         }
+
+    fun checkInternetConnection() {
+        val networkConnection = NetworkConnection(applicationContext)
+        networkConnection.observe(this, { isConnected ->
+            if (isConnected) {
+                if (findNavController(R.id.nav_host_fragment).currentBackStackEntry?.destination?.id == R.id.internetFragment)
+                    findNavController(R.id.nav_host_fragment).popBackStack()
+            } else {
+                findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_internetFragment)
+            }
+        })
+
+    }
 }

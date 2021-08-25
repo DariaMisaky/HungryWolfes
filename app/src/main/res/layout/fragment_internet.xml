@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.favoritesScreen.FavoriteFragment">
-
+<data>
+    <variable
+        name="activity"
+        type="com.example.hungrywolfes.ui.MainActivity" />
+</data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
@@ -66,11 +70,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="@{()->activity.checkInternetConnection()}"
                 android:text="@string/try_again"
                 android:textColor="@color/white" />
 
         </androidx.cardview.widget.CardView>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

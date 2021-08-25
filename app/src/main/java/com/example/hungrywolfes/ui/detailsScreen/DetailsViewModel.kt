@@ -46,11 +46,9 @@ class DetailsViewModel : ViewModel() {
     }
 
     fun onFavoriteButton() {
-        if (itemInFavorite()) {
+        if (itemInFavorite() == true) {
             buttonCheckStatus.value = false
             removeMealFromFavorite()
-
-
         } else {
             addMealToFavorite()
             buttonCheckStatus.value = true

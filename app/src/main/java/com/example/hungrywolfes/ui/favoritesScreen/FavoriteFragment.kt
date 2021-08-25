@@ -57,7 +57,7 @@ class FavoriteFragment : Fragment() {
 
     private fun setUpObservers() {
         viewModel.favoriteMealList.observe(viewLifecycleOwner) {
-            viewModel.favoriteMealList.value?.let { it1 -> favoriteAdapter.setDataImages(it1) }
+            viewModel.favoriteMealList.value?.let { it -> favoriteAdapter.setDataImages(it) }
         }
     }
 
