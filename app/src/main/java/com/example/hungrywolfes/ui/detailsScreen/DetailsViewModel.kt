@@ -24,14 +24,10 @@ class DetailsViewModel : ViewModel() {
     }
 
     val buttonCheckStatus: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-
-    private val _favoriteMealList = MutableLiveData<MutableList<ListMealsImages>>()
-    val favoriteMealList: MutableLiveData<MutableList<ListMealsImages>> = _favoriteMealList
-
+    private var favoriteMealList= mutableListOf<ListMealsImages>()
 
     init {
-        _favoriteMealList.value = Hawk.get(keyHawk) ?: mutableListOf()
-
+        favoriteMealList = Hawk.get(keyHawk) ?: mutableListOf()
     }
 
     fun navigateBack() {
@@ -63,7 +59,7 @@ class DetailsViewModel : ViewModel() {
 
     private fun addMealToFavorite() {
         detailsMeal.value?.let { details ->
-            _favoriteMealList.value?.add(
+            favoriteMealList.add(
                 ListMealsImages(
                     details.strMeal,
                     details.strMealThumb,
@@ -71,12 +67,12 @@ class DetailsViewModel : ViewModel() {
                 )
             )
         }
-        Hawk.put(keyHawk, _favoriteMealList.value)
+        Hawk.put(keyHawk, favoriteMealList)
     }
 
     private fun removeMealFromFavorite() {
         detailsMeal.value?.let { details ->
-            _favoriteMealList.value?.remove(
+            favoriteMealList.remove(
                 ListMealsImages(
                     details.strMeal,
                     details.strMealThumb,
@@ -84,12 +80,12 @@ class DetailsViewModel : ViewModel() {
                 )
             )
         }
-        Hawk.put(keyHawk, _favoriteMealList.value)
+        Hawk.put(keyHawk, favoriteMealList)
     }
 
     private fun itemInFavorite(): Boolean {
         return detailsMeal.value?.let { details ->
-            favoriteMealList.value?.contains(
+            favoriteMealList.contains(
                 ListMealsImages(
                     details.strMeal,
                     details.strMealThumb,

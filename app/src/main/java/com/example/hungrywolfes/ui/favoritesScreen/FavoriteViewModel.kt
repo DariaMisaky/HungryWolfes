@@ -12,9 +12,8 @@ class FavoriteViewModel : ViewModel() {
     val favoriteMealList: MutableLiveData<MutableList<ListMealsImages>> = _favoriteMealList
 
     fun onRemoveItem(listMeal: ListMealsImages) {
-        val currentList = Hawk.get<List<ListMealsImages>>(keyHawk).toMutableList()
-        currentList.remove(listMeal)
-        Hawk.put(keyHawk, currentList)
+        _favoriteMealList.value?.remove(listMeal)
+        Hawk.put(keyHawk, _favoriteMealList.value)
     }
 
     fun refresh() {
