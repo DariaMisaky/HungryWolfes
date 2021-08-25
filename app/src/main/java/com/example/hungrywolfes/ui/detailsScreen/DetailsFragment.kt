@@ -52,7 +52,6 @@ class DetailsFragment : Fragment() {
     private fun setupObservers() {
         viewModel.onBackButton.observe(viewLifecycleOwner) {
             findNavController().popBackStack()
-            // findNavController().navigate(R.id.action_detailsFragment_to_favoriteFragment)
         }
         viewModel.detailsMeal.observe(viewLifecycleOwner) {
             Glide.with(binding.mealImage)
@@ -60,17 +59,9 @@ class DetailsFragment : Fragment() {
                 .placeholder(R.drawable.loading_img)
                 .error(R.drawable.ic_connection_error)
                 .into(binding.mealImage)
-            binding.favoriteButton.isChecked = viewModel.itemInFavorite() == true
         }
         viewModel.stringTags.observe(viewLifecycleOwner) {
             it?.let { detailsAdapter.setDataTags(it) }
-        }
-        viewModel.addItemToFavoriteButton.observe(viewLifecycleOwner) {
-            if (viewModel.itemInFavorite()) {
-                viewModel.removeMealFromFavorite()
-            } else {
-                viewModel.addMealToFavorite()
-            }
         }
     }
 }

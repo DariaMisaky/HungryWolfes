@@ -53,8 +53,5 @@
         <argument
             android:name="idMeal"
             app:argType="string" />
-        <action
-            android:id="@+id/action_detailsFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
     </fragment>
 </navigation>

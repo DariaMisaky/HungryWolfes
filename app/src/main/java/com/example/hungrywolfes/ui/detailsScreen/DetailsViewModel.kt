@@ -1,5 +1,6 @@
 package com.example.hungrywolfes.ui.detailsScreen
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.hungrywolfes.network.CategoryApi
 import com.example.hungrywolfes.network.ListMealsDetails
@@ -22,9 +23,7 @@ class DetailsViewModel : ViewModel() {
         it.strTags?.split(",")
     }
 
-
-    private val _addItemToFavoriteButton = MutableLiveData<Boolean>()
-    val addItemToFavoriteButton: LiveData<Boolean> = _addItemToFavoriteButton
+    val buttonCheckStatus: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     private val _favoriteMealList = MutableLiveData<MutableList<ListMealsImages>>()
     val favoriteMealList: MutableLiveData<MutableList<ListMealsImages>> = _favoriteMealList
@@ -32,6 +31,7 @@ class DetailsViewModel : ViewModel() {
 
     init {
         _favoriteMealList.value = Hawk.get(keyHawk) ?: mutableListOf()
+
     }
 
     fun navigateBack() {
@@ -43,16 +43,25 @@ class DetailsViewModel : ViewModel() {
             try {
                 _detailsMeal.value =
                     CategoryApi.retrofitService.detailsFood(item).meals.firstOrNull()
+                buttonCheckStatus.value = itemInFavorite()
             } catch (e: java.lang.Exception) {
             }
         }
     }
 
     fun onFavoriteButton() {
-        _addItemToFavoriteButton.value = addItemToFavoriteButton.value == false
+        if (itemInFavorite()) {
+            buttonCheckStatus.value = false
+            removeMealFromFavorite()
+
+
+        } else {
+            addMealToFavorite()
+            buttonCheckStatus.value = true
+        }
     }
 
-    fun addMealToFavorite() {
+    private fun addMealToFavorite() {
         detailsMeal.value?.let { details ->
             _favoriteMealList.value?.add(
                 ListMealsImages(
@@ -65,7 +74,7 @@ class DetailsViewModel : ViewModel() {
         Hawk.put(keyHawk, _favoriteMealList.value)
     }
 
-    fun removeMealFromFavorite() {
+    private fun removeMealFromFavorite() {
         detailsMeal.value?.let { details ->
             _favoriteMealList.value?.remove(
                 ListMealsImages(
@@ -78,7 +87,7 @@ class DetailsViewModel : ViewModel() {
         Hawk.put(keyHawk, _favoriteMealList.value)
     }
 
-    fun itemInFavorite(): Boolean {
+    private fun itemInFavorite(): Boolean {
         return detailsMeal.value?.let { details ->
             favoriteMealList.value?.contains(
                 ListMealsImages(

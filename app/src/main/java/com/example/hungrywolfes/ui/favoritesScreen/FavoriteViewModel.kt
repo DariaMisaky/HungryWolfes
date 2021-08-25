@@ -17,7 +17,7 @@ class FavoriteViewModel : ViewModel() {
         Hawk.put(keyHawk, currentList)
     }
 
-    init {
+    fun refresh() {
         _favoriteMealList.value = Hawk.get(keyHawk)
     }
 }
