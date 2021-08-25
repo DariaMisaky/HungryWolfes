@@ -20,7 +20,7 @@
         android:id="@+id/fragment_search_screen"
         android:name="com.example.hungrywolfes.ui.searchScreen.SearchScreenFragment"
         android:label="fragment_search_screen"
-        tools:layout="@layout/fragment_search_screen" >
+        tools:layout="@layout/fragment_search_screen">
         <action
             android:id="@+id/action_fragment_search_screen_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -29,7 +29,7 @@
         android:id="@+id/userFragment"
         android:name="com.example.hungrywolfes.ui.profileScreen.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" >
+        tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_userFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
@@ -38,7 +38,7 @@
         android:id="@+id/favoriteFragment"
         android:name="com.example.hungrywolfes.ui.favoritesScreen.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -47,11 +47,18 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.hungrywolfes.ui.detailsScreen.DetailsFragment"
         android:label="DetailsFragment">
-       <action
+        <action
             android:id="@+id/action_detailsFragment_to_homeScreen"
             app:destination="@id/homeScreen" />
         <argument
             android:name="idMeal"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/internetFragment"
+        android:name="com.example.hungrywolfes.ui.internetScreen.InternetFragment"
+        android:label="InternetFragment" />
+    <action
+        android:id="@+id/action_global_internetFragment"
+        app:destination="@id/internetFragment" />
 </navigation>
