@@ -1,4 +1,4 @@
-package com.example.hungrywolfes.ui
+package com.example.hungrywolfes.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hungrywolfes.DetailBinding
 import com.example.hungrywolfes.R
-import com.example.hungrywolfes.ui.DetailsAdapter
+import com.example.hungrywolfes.ui.adapters.DetailsAdapter
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailBinding
