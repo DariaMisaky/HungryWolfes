@@ -3,16 +3,15 @@ package com.example.hungrywolfes.ui.profileScreen
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.hungrywolfes.Constants
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.databinding.FragmentUserBinding
-private const val terms_and_conditions="https://www.wolfpack-digital.com/privacy"
 
 class UserFragment : Fragment() {
 
@@ -43,7 +42,7 @@ class UserFragment : Fragment() {
         }
         viewModel.onTermsAndConditions.observe(viewLifecycleOwner) {
             val intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(terms_and_conditions))
+                Intent(Intent.ACTION_VIEW, Uri.parse(Constants.TERMS_AND_CONDITIONS_URL))
             startActivity(intent)
         }
     }

@@ -32,7 +32,6 @@ class FavoriteAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val photo = listMealsImages[position]
-
         Glide.with(holder.mealsImages)
             .load(photo.strMealThumb)
             .placeholder(R.drawable.loading_img)

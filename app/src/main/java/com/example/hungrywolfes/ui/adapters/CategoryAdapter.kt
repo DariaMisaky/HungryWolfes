@@ -16,13 +16,11 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
     private var selectedItemPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-
         val layout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
 
         return CategoryViewHolder(layout)
-
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
@@ -44,7 +42,6 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
-
     }
 
     private fun updateButtonDesign(holder: CategoryViewHolder, position: Int) {
@@ -65,7 +62,6 @@ class CategoryAdapter(private val clickListener: (item: ListMealCategory) -> Uni
             )
             holder.line.visibility = View.INVISIBLE
         }
-
     }
 
     inner class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {

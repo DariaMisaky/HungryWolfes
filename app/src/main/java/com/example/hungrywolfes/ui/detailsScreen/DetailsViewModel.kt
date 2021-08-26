@@ -1,15 +1,13 @@
 package com.example.hungrywolfes.ui.detailsScreen
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.example.hungrywolfes.Constants
 import com.example.hungrywolfes.network.CategoryApi
 import com.example.hungrywolfes.network.ListMealsDetails
 import com.example.hungrywolfes.network.ListMealsImages
 import com.example.hungrywolfs.SingleLiveEvent
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.launch
-
-private const val keyHawk = "favoriteFood"
 
 class DetailsViewModel : ViewModel() {
 
@@ -24,10 +22,10 @@ class DetailsViewModel : ViewModel() {
     }
 
     val buttonCheckStatus: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    private var favoriteMealList= mutableListOf<ListMealsImages>()
+    private var favoriteMealList = mutableListOf<ListMealsImages>()
 
     init {
-        favoriteMealList = Hawk.get(keyHawk) ?: mutableListOf()
+        favoriteMealList = Hawk.get(Constants.KEY_HAWK) ?: mutableListOf()
     }
 
     fun navigateBack() {
@@ -65,7 +63,7 @@ class DetailsViewModel : ViewModel() {
                 )
             )
         }
-        Hawk.put(keyHawk, favoriteMealList)
+        Hawk.put(Constants.KEY_HAWK, favoriteMealList)
     }
 
     private fun removeMealFromFavorite() {
@@ -78,7 +76,7 @@ class DetailsViewModel : ViewModel() {
                 )
             )
         }
-        Hawk.put(keyHawk, favoriteMealList)
+        Hawk.put(Constants.KEY_HAWK, favoriteMealList)
     }
 
     private fun itemInFavorite(): Boolean {

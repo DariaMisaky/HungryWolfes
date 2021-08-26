@@ -4,7 +4,6 @@ package com.example.hungrywolfes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -16,7 +15,6 @@ import com.example.hungrywolfes.databinding.ActivityMainBinding
 import com.example.hungrywolfes.network.NetworkConnection
 
 private lateinit var binding: ActivityMainBinding
-private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             navController
         )
     }
+
     private val destinationChangedListener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
             val bottomNavVisibility = when (destination.id) {
@@ -50,10 +49,8 @@ class MainActivity : AppCompatActivity() {
         if (boolean) {
             if (findNavController(R.id.nav_host_fragment).currentBackStackEntry?.destination?.id == R.id.internetFragment)
                 findNavController(R.id.nav_host_fragment).popBackStack()
-            Log.d(TAG, "onCreate: ON")
         } else {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_internetFragment)
-            Log.d(TAG, "onCreate: OFF")
         }
     }
 }
