@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.hungrywolfes.ui
 
 import androidx.appcompat.app.AppCompatActivity
