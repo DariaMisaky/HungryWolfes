@@ -62,7 +62,8 @@ class HomeFragment : Fragment() {
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
             binding.recyclerViewPhotos.scrollToPosition(0)
-            binding.constraintLayout.visibility = View.VISIBLE
+            if(it.meals.isNotEmpty())
+            {binding.constraintLayout.visibility = View.VISIBLE}
         }
         viewModel.goToSearch.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_homeScreen_to_fragment_search_screen)
