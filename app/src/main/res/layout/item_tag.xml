@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/button_item"
     android:layout_width="wrap_content"
-    android:layout_height="28dp"
+    android:layout_height="@dimen/tag_size"
     android:background="@drawable/round_button"
     android:gravity="center"
     android:textAllCaps="false"
@@ -13,6 +13,3 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="@string/search" />
-
-
-

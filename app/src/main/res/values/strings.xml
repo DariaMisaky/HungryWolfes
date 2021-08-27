@@ -22,4 +22,7 @@
     <string name="check_internet_message">Your internet connection is currently not available please check or try again.</string>
     <string name="try_again">Try again</string>
     <string name="long_press">long press an item to delete</string>
+    <string name="try_searching">Try searching the item with a different keyword</string>
+    <string name="item_not_found">Item not found</string>
+    <string name="watch_video">Watch Video</string>
 </resources>

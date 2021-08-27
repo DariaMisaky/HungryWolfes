@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         setupObservers()
     }
 
-    fun navigateToFragment(id: String) {
+    private fun navigateToFragment(id: String) {
         val action = HomeFragmentDirections.actionHomeScreenToDetailsFragment(id)
         findNavController().navigate(action)
     }
@@ -62,6 +62,8 @@ class HomeFragment : Fragment() {
         viewModel.mealImages.observe(viewLifecycleOwner) {
             imagesAdapter.setDataImages(it.meals)
             binding.recyclerViewPhotos.scrollToPosition(0)
+            if(it.meals.isNotEmpty())
+            {binding.constraintLayout.visibility = View.VISIBLE}
         }
         viewModel.goToSearch.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_homeScreen_to_fragment_search_screen)

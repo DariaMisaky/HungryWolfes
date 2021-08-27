@@ -26,6 +26,7 @@ object NetworkConnection : LiveData<Boolean>() {
 
     private fun getDetails() {
         val cm = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        postValue(cm.activeNetworkInfo?.isConnectedOrConnecting == true)
         cm.registerNetworkCallback(networkRequest, object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
