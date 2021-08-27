@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.favoritesScreen.FavoriteFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/grey">
+
+        <ImageView
+            android:id="@+id/internet_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_internet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/constraint_layout"
+            app:layout_constraintStart_toStartOf="@id/constraint_layout"
+            app:layout_constraintTop_toTopOf="@id/constraint_layout"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:id="@+id/no_internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/no_internet_connection"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium_plus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/internet_icon" />
+
+        <TextView
+            android:id="@+id/message_internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_large"
+            android:text="@string/check_internet_message"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintEnd_toEndOf="@id/no_internet"
+            app:layout_constraintStart_toStartOf="@+id/no_internet"
+            app:layout_constraintTop_toBottomOf="@+id/no_internet" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_extra_extra_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_extra_extra_large"
+            android:backgroundTint="@color/orange"
+            app:cardCornerRadius="@dimen/card_radius_size"
+            app:layout_constraintEnd_toEndOf="@+id/message_internet"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintStart_toStartOf="@+id/message_internet"
+            app:layout_constraintTop_toBottomOf="@+id/message_internet">
+
+            <TextView
+                android:id="@+id/button_try_again"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/try_again"
+                android:textColor="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

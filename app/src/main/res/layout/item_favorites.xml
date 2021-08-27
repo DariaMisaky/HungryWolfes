@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="0dp"
@@ -19,11 +18,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/meal_image"
-            android:layout_width="78dp"
-            android:layout_height="78dp"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_small"
             android:elevation="@dimen/elevation_max"
             app:layout_constraintLeft_toLeftOf="@id/card_view"
             app:layout_constraintRight_toRightOf="@id/card_view"
@@ -34,15 +33,15 @@
             android:id="@+id/meal_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/elevation_max"
+            android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_extra_large"
+            android:elevation="@dimen/elevation_max"
+            android:maxLines="3"
             android:paddingStart="@dimen/margin_medium"
             android:paddingEnd="@dimen/margin_extra_large"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_medium"
-            android:layout_gravity="center"
-            android:maxLines="3"
             android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
             tools:text="Beef Banh Mi Bowls with Sriracha Mayo, Carrot and Pickled Cucumber" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

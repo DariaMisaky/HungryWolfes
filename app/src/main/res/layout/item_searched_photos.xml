@@ -31,16 +31,16 @@
             android:id="@+id/meal_description"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_size_extra_large"
-            android:layout_marginTop="@dimen/text_margin_extra_large"
-            android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/text_margin_extra_large"
             android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
             android:elevation="@dimen/elevation_max"
             android:ellipsize="end"
-            android:textStyle="bold"
             android:gravity="center"
             android:maxLines="3"
             android:textColor="@color/black"
+            android:textStyle="bold"
             tools:text="Description" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

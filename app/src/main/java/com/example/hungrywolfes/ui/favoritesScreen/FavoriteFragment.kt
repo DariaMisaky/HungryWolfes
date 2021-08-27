@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.databinding.FragmentFavoriteBinding
-import com.example.hungrywolfes.ui.FavoriteAdapter
+import com.example.hungrywolfes.ui.adapters.FavoriteAdapter
 
 class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
@@ -57,7 +57,7 @@ class FavoriteFragment : Fragment() {
 
     private fun setUpObservers() {
         viewModel.favoriteMealList.observe(viewLifecycleOwner) {
-            viewModel.favoriteMealList.value?.let { it1 -> favoriteAdapter.setDataImages(it1) }
+            favoriteAdapter.setDataImages(it)
         }
     }
 

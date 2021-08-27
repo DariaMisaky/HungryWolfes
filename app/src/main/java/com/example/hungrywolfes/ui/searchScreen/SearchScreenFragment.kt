@@ -1,6 +1,5 @@
 package com.example.hungrywolfes.ui.searchScreen
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.databinding.FragmentSearchScreenBinding
 import com.example.hungrywolfes.R
-import com.example.hungrywolfes.ui.SearchedImagesAdapter
+import com.example.hungrywolfes.ui.adapters.SearchedImagesAdapter
 import com.example.hungrywolfes.ui.overview.HomeFragmentDirections
 
 private const val TAG = "SearchScreenFragment"

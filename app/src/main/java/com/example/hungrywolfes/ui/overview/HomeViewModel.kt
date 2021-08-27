@@ -31,7 +31,7 @@ class OverviewViewModel : ViewModel() {
             try {
                 CategoryApi.retrofitService.getCategory().let { categories ->
                     _mealCategory.value = categories
-                    categories.meals.getOrNull(0)?.let { getCategoryMeals(it)  }
+                    categories.meals.getOrNull(0)?.let { getCategoryMeals(it) }
                 }
 
             } catch (e: Exception) {
@@ -51,7 +51,6 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun searchClicked() {
-       _goToSearch.call()
+        _goToSearch.call()
     }
-
 }
