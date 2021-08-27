@@ -1,12 +1,11 @@
 package com.example.hungrywolfes.ui.searchScreen
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -16,15 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hungrywolfes.databinding.FragmentSearchScreenBinding
 import com.example.hungrywolfes.R
 import com.example.hungrywolfes.ui.adapters.SearchedImagesAdapter
-import com.example.hungrywolfes.ui.overview.HomeFragmentDirections
-
-private const val TAG = "SearchScreenFragment"
 
 class SearchScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchScreenBinding
     private val viewModel: SearchViewModel by viewModels()
-    private val searchedImagesAdapter = SearchedImagesAdapter{item -> navigateToDetailsFragment(item)}
+    private val searchedImagesAdapter =
+        SearchedImagesAdapter { item -> navigateToDetailsFragment(item) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +38,22 @@ class SearchScreenFragment : Fragment() {
         searchImages()
         setupObservers()
     }
-    fun navigateToDetailsFragment(Mealid:String){
-        val action= SearchScreenFragmentDirections.actionFragmentSearchScreenToDetailsFragment(Mealid)
+
+    private fun navigateToDetailsFragment(mealId: String) {
+        val action =
+            SearchScreenFragmentDirections.actionFragmentSearchScreenToDetailsFragment(mealId)
         findNavController().navigate(action)
     }
+
     private fun searchImages() {
         binding.searchMeal.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(p0: String): Boolean {
                 hideKeyboard()
                 return true
             }
-            override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0 != null) {
-                    viewModel.getSearchedMeal(p0)
-                }
+
+            override fun onQueryTextChange(p0: String): Boolean {
+                viewModel.getSearchedMeal(p0)
                 return false
             }
         })
@@ -95,6 +94,15 @@ class SearchScreenFragment : Fragment() {
         viewModel.onBackButton.observe(viewLifecycleOwner) {
             hideKeyboard()
             findNavController().popBackStack()
+        }
+        viewModel.receivedInfo.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.cardView.visibility = View.VISIBLE
+                binding.constraintLayoutResult.visibility = View.INVISIBLE
+            } else {
+                binding.cardView.visibility = View.INVISIBLE
+                binding.constraintLayoutResult.visibility = View.VISIBLE
+            }
         }
     }
 

@@ -46,4 +46,5 @@
     <dimen name="view_large">160dp</dimen>
     <dimen name="small_padding">20dp</dimen>
     <dimen name="padding_extra_small">12dp</dimen>
+    <dimen name="tag_size">28dp</dimen>
 </resources>

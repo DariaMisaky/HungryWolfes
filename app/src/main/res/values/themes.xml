@@ -14,10 +14,24 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryDark">@color/orange</item>
         <item name="colorAccent">@color/orange</item>
+    </style>
+
+    <style name="MyCardView" parent="@style/Theme.HungryWolfes">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut
+        </item>
+    </style>
+
+
+    <style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">35dp</item>
+        <item name="cornerSizeTopLeft">35dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
 </resources>
